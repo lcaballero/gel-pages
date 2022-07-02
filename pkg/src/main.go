@@ -8,6 +8,8 @@ import (
 	"github.com/lcaballero/gel"
 )
 
+//go:generate bash ./gen.sh
+
 func PostNotImplementedYet(page string) gel.View {
 	log.Fatalf("page not implemented yet: '%s'", page)
 	return nil
