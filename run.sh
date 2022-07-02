@@ -11,24 +11,11 @@ build() {
 }
 
 dist() {
-  mkdir -p .dist/posts/side-projects \
-        .dist/posts/possible-site-org \
-        .dist/posts/cli-snippets \
-        .dist/posts/site-design-tools \
-        .dist/posts/organizing-pins \
-        .dist/posts/first-steps-of-building-this-site
-
-  gel-pages before-i-get-started > .dist/index.html
-  gel-pages side-projects > .dist/posts/side-projects/index.html
-  gel-pages possible-site-org > .dist/posts/possible-site-org/index.html
-  gel-pages cli-snippets > .dist/posts/cli-snippets/index.html
-  gel-pages site-design-tools > .dist/posts/site-design-tools/index.html
-  gel-pages organizing-pins > .dist/posts/organizing-pins/index.html
-  gel-pages first-steps-of-building-this-site > .dist/posts/first-steps-of-building-this-site/index.html
-}
-
-create() {
-  build && dist
+  build && \
+    gel-pages write \
+              --root .dist \
+              --posts posts \
+              --home before-i-get-started
 }
 
 list() {
@@ -49,4 +36,6 @@ gen::clean() {
   gen::files | xargs rm
 }
 
+
 "$@"
+

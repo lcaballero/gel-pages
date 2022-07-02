@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostOrganizingPins() Page {
-	return Page{
+func NewPostOrganizingPins() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			ID:    "organizing-pins",
 			Title: "Organizing Pins",

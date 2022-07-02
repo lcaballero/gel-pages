@@ -42,7 +42,7 @@ func HandleGen(ctx *cli.Context) error {
 		log.Fatalf("not found id:'%s'", opts.Id())
 	}
 	if ctx.Bool("debug") {
-		p.Debug = pages.ToDebug()
+		p.SetDebug(pages.ToDebug())
 	}
 	fmt.Println(p.ToNode().String())
 	return nil
@@ -80,7 +80,6 @@ func HandleWrite(ctx *cli.Context) error {
 		}
 		hasWritenHomePage = true
 	}
-
 	return nil
 }
 

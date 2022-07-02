@@ -1,11 +1,4 @@
-(setq compilation-post-dir (format "%ssrc" default-directory))
-
-(defun tools-load ()
-  (interactive)
-  (let ((default-directory (locate-dominating-file buffer-file-name ".dir-locals.el"))
-        (tools-file (format "%s.tools.el" default-directory)))
-    (load tools-file)
-    (message "reloaded '%s'" tools-file)))
+(setq compilation-post-dir (format "%spkg/src" default-directory))
 
 (defun compilation-post-dir (&rest _args)
   "Setting 'default-directory' after 'compilation-start'.
@@ -17,6 +10,13 @@ Can be an advice for 'compilation-start'."
         (cd post-dir)))))
 
 (advice-add 'compilation-start :after #'compilation-post-dir)
+
+(defun tools-load ()
+  (interactive)
+  (let ((default-directory (locate-dominating-file buffer-file-name ".dir-locals.el"))
+        (tools-file (format "%s.tools.el" default-directory)))
+    (load tools-file)
+    (message "reloaded '%s'" tools-file)))
 
 (defun region-to-inserted (first second)
   (narrow-to-region beg end)

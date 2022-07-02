@@ -11,26 +11,25 @@ func PostNotImplementedYet(page string) gel.View {
 	return nil
 }
 
-type Pages map[string]Page
+type HtmlPages map[string]WebFile
 
-func NewPages() Pages {
-	pages := Pages{}
-	pages.Add(NewPostBeforeIGetStarted)
-	pages.Add(NewPostSideProjects)
-	pages.Add(NewPostPossibleSiteOrg)
-	pages.Add(NewPostCLISnippets)
-	pages.Add(NewPostSiteDesignTools)
-	pages.Add(NewPostOrganizingPins)
-	pages.Add(NewPostFirstStepsOfBuildingThisSite)
+func NewPages() HtmlPages {
+	pages := HtmlPages{}
+	pages.Add(NewPostBeforeIGetStarted())
+	pages.Add(NewPostSideProjects())
+	pages.Add(NewPostPossibleSiteOrg())
+	pages.Add(NewPostCLISnippets())
+	pages.Add(NewPostSiteDesignTools())
+	pages.Add(NewPostOrganizingPins())
+	pages.Add(NewPostFirstStepsOfBuildingThisSite())
 	return pages
 }
 
-func (p Pages) Add(fn func() Page) {
-	page := fn()
+func (p HtmlPages) Add(page WebFile) {
 	p[page.Meta().ID] = page
 }
 
-func (p Pages) ToDebug() Debug {
+func (p HtmlPages) ToDebug() Debug {
 	m := map[string]interface{}{}
 	pages := []map[string]interface{}{}
 	for id, page := range p {

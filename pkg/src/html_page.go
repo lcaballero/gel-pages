@@ -6,6 +6,13 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
+type WebFile interface {
+	View
+	Meta() PageMeta
+	SetDebug(v Viewable)
+	Bytes() []byte
+}
+
 type Labels map[string]string
 
 type PageMeta struct {
@@ -15,7 +22,10 @@ type PageMeta struct {
 	Labels  Labels
 }
 
-type Page struct {
+// func (p PageMeta) ID() string {
+// }
+
+type HtmlPage struct {
 	PageMeta     PageMeta
 	Scripts      Viewable
 	Styles       Viewable
@@ -29,11 +39,15 @@ type Page struct {
 	Debug        Viewable
 }
 
-func (p *Page) Meta() PageMeta {
+func (p *HtmlPage) SetDebug(v Viewable) {
+	p.Debug = v
+}
+
+func (p *HtmlPage) Meta() PageMeta {
 	return p.PageMeta
 }
 
-func (p *Page) ToNode() *Node {
+func (p *HtmlPage) ToNode() *Node {
 	return Frag(
 		HTML5(),
 		Html(
@@ -65,7 +79,7 @@ func (p *Page) ToNode() *Node {
 	).ToNode()
 }
 
-func (p Page) String() string {
+func (p HtmlPage) String() string {
 	if p.UseIndention {
 		indent := NewIndent()
 		buf := bytes.NewBufferString("")
@@ -75,7 +89,7 @@ func (p Page) String() string {
 	return p.ToNode().String()
 }
 
-func (p Page) Bytes() []byte {
+func (p HtmlPage) Bytes() []byte {
 	if p.UseIndention {
 		indent := NewIndent()
 		buf := bytes.NewBufferString("")

@@ -6,20 +6,20 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-type PlainPage struct {
+type TextPage struct {
 	Meta    PageMeta
 	Content View
 }
 
-func (p *PlainPage) ToNode() *Node {
+func (p *TextPage) ToNode() *Node {
 	return Frag(p.Content).ToNode()
 }
 
-func (p *PlainPage) String() string {
+func (p *TextPage) String() string {
 	return string(p.Bytes())
 }
 
-func (p *PlainPage) Bytes() []byte {
+func (p *TextPage) Bytes() []byte {
 	buf := bytes.NewBufferString("")
 	p.ToNode().WriteTo(buf)
 	return buf.Bytes()

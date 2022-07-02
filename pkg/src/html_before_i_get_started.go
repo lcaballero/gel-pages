@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostBeforeIGetStarted() Page {
-	return Page{
+func NewPostBeforeIGetStarted() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "Before I Get Started",
 			Labels: Labels{

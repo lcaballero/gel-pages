@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostSiteDesignTools() Page {
-	return Page{
+func NewPostSiteDesignTools() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			ID:    "site-design-tools",
 			Title: "Site Design Tools",

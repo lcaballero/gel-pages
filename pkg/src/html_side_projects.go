@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostSideProjects() Page {
-	return Page{
+func NewPostSideProjects() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "Side Projects",
 			ID:    "side-projects",

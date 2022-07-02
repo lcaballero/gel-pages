@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostFirstStepsOfBuildingThisSite() Page {
-	return Page{
+func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			ID:    "first-steps-of-building-this-site",
 			Title: "First Steps I Did When Building This Site",

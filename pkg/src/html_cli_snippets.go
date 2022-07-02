@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostCLISnippets() Page {
-	return Page{
+func NewPostCLISnippets() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			ID:    "cli-snippets",
 			Title: "CLI Snippet",

@@ -4,8 +4,8 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostPossibleSiteOrg() Page {
-	return Page{
+func NewPostPossibleSiteOrg() *HtmlPage {
+	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "Possible Site Org",
 			ID:    "possible-site-org",
