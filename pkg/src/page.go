@@ -16,7 +16,7 @@ type PageMeta struct {
 }
 
 type Page struct {
-	Meta         PageMeta
+	PageMeta     PageMeta
 	Scripts      Viewable
 	Styles       Viewable
 	Description  View
@@ -27,6 +27,10 @@ type Page struct {
 	UseIndention bool
 	UseAnalytics bool
 	Debug        Viewable
+}
+
+func (p *Page) Meta() PageMeta {
+	return p.PageMeta
 }
 
 func (p *Page) ToNode() *Node {
@@ -42,8 +46,8 @@ func (p *Page) ToNode() *Node {
 				Def(p.Styles, BaseCSS),
 				Def(p.Scripts, BaseJS),
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
-				Meta.Atts("name", "title", "content", p.Meta.Title),
-				Title(Def(p.Meta.Title, p.Meta.Title)),
+				Meta.Atts("name", "title", "content", p.Meta().Title),
+				Title(Def(p.Meta().Title, p.Meta().Title)),
 			),
 			Body(
 				Div.Class("main").Add(
@@ -69,4 +73,16 @@ func (p Page) String() string {
 		return buf.String()
 	}
 	return p.ToNode().String()
+}
+
+func (p Page) Bytes() []byte {
+	if p.UseIndention {
+		indent := NewIndent()
+		buf := bytes.NewBufferString("")
+		p.ToNode().WriteToIndented(indent, buf)
+		return buf.Bytes()
+	}
+	buf := bytes.NewBufferString("")
+	p.ToNode().WriteTo(buf)
+	return buf.Bytes()
 }

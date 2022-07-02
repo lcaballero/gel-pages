@@ -6,10 +6,13 @@ import (
 
 func NewPostPossibleSiteOrg() Page {
 	return Page{
-		Meta: PageMeta{
-			Title:  "Possible Site Org",
-			Labels: Labels{"area": "header"},
-			ID:     "possible-site-org",
+		PageMeta: PageMeta{
+			Title: "Possible Site Org",
+			ID:    "possible-site-org",
+			Labels: Labels{
+				"area": "header",
+				"mime": "text/html",
+			},
 		},
 		Content: Div(
 			H2.Text("Possible Site Organization [DRAFT]"),

@@ -6,10 +6,13 @@ import (
 
 func NewPostOrganizingPins() Page {
 	return Page{
-		Meta: PageMeta{
-			ID:     "organizing-pins",
-			Title:  "Organizing Pins",
-			Labels: Labels{"area": "aux"},
+		PageMeta: PageMeta{
+			ID:    "organizing-pins",
+			Title: "Organizing Pins",
+			Labels: Labels{
+				"area": "aux",
+				"mime": "text/html",
+			},
 		},
 		Content: Div.Class("with-bullets").Add(
 			H2.Text(`Organizing Pins`),

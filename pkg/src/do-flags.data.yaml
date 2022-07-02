@@ -1,60 +1,47 @@
 package: main
 sub-commands:
-  - name: kind
-    usage: "read the kind of data from the URL"
-    flags:
-      - name: url
-        type: string
-        usage: "Provide the derived type for the given URL"
-      - name: debug
-        type: bool
-        usage: "Provided more information when executing command"
-  - name: conf
-    usage: "source the conf from the given file"
-    flags:
-      - name: file
-        type: string
-        usage: "Filename of the scrape system"
-  - name: req
-    usage: "make a request and store the result"
-    flags:
-      - name: in
-        type: string
-        usage: "What JSON file to use when making scrape request"
-      - name: debug
-        type: bool
-        usage: "Enters debug mode. Adds extra output. Skips requests or writing files."
-  - name: scrape
-    usage: "scrape the given url and save result"
-    flags:
-      - name: url
-        type: string
-        usage: "The url of which to scrape"
-      - name: out
-        type: string
-        usage: "What file name to use when saving scrape response"
-      - name: debug
-        type: bool
-        usage: "Enters debug mode. Adds extra output. Skips requests or writing files."
-      - name: apiUrl
-        type: string
-        usage: "The api endpoint to use if provided instead of the default"
-      - name: kind
-        type: string
-        usage: "kind slug abbrevation empty will be derived from url"
-      - name: scrapeJSON
-        type: string
-        usage: "Name of output .scrape.json file"
-        hidden: true
-  - name: show
-    usage: "no op showing given the flags"
+  - name: list
+    usage: "lists the pages that can be generated"
     flags:
       - name: debug
         type: bool
-        usage: "Enters debug mode. Adds extra output. Skips requests or writing files."
-      - name: kind
+        usage: "run in debug mode providing extra output information"
+      - name: root
         type: string
-        usage: "Parse kind (ex. google, hackernews, etc)"
-      - name: file
+        usage: "root directory to write prepend to output dir"
+      - name: home
         type: string
-        usage: "Names the file to use as input for processing"
+        usage: "the ID of the home page"
+  - name: gen
+    usage: "generate html and write it to stdout"
+    flags:
+      - name: id
+        type: string
+        usage: "the id of the page to generate"
+      - name: root
+        type: string
+        usage: "root directory to write prepend to output dir"
+      - name: debug
+        type: bool
+        usage: "add debug html output to rendered page(s)"
+      - name: paths
+        type: bool
+        usage: "outputs the effective path(s)"
+  - name: write
+    usage: "generate html and write to file based on parameters"
+    flags:
+      - name: id
+        type: string
+        usage: "the id of the page to generate"
+      - name: root
+        type: string
+        usage: "root directory to write prepend to output dir"
+      - name: posts
+        type: string
+        usage: "directory where posts are to be written"
+      - name: debug
+        type: bool
+        usage: "add debug html output to rendered page(s)"
+      - name: home
+        type: string
+        usage: "the ID of the home page"

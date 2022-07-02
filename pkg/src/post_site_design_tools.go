@@ -6,10 +6,13 @@ import (
 
 func NewPostSiteDesignTools() Page {
 	return Page{
-		Meta: PageMeta{
-			ID:     "site-design-tools",
-			Title:  "Site Design Tools",
-			Labels: Labels{"area": "aux"},
+		PageMeta: PageMeta{
+			ID:    "site-design-tools",
+			Title: "Site Design Tools",
+			Labels: Labels{
+				"area": "aux",
+				"mime": "text/html",
+			},
 		},
 		Content: Div(
 			H2.Text(`Site Design Tools`),

@@ -6,10 +6,13 @@ import (
 
 func NewPostSideProjects() Page {
 	return Page{
-		Meta: PageMeta{
-			Title:  "Side Projects",
-			Labels: Labels{"area": "header"},
-			ID:     "side-projects",
+		PageMeta: PageMeta{
+			Title: "Side Projects",
+			ID:    "side-projects",
+			Labels: Labels{
+				"area": "header",
+				"mime": "text/html",
+			},
 		},
 		Content: Div(
 			H3.Text("Side Projects"),

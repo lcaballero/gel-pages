@@ -6,10 +6,13 @@ import (
 
 func NewPostFirstStepsOfBuildingThisSite() Page {
 	return Page{
-		Meta: PageMeta{
-			ID:     "first-steps-of-building-this-site",
-			Title:  "First Steps I Did When Building This Site",
-			Labels: Labels{"area": "draft"},
+		PageMeta: PageMeta{
+			ID:    "first-steps-of-building-this-site",
+			Title: "First Steps I Did When Building This Site",
+			Labels: Labels{
+				"area": "draft",
+				"mime": "text/html",
+			},
 		},
 		Content: Div(
 			H2.Text(`The Steps I Did When Building This Site`),

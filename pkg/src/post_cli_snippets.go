@@ -6,10 +6,13 @@ import (
 
 func NewPostCLISnippets() Page {
 	return Page{
-		Meta: PageMeta{
-			ID:     "cli-snippets",
-			Title:  "CLI Snippet",
-			Labels: Labels{"area": "header"},
+		PageMeta: PageMeta{
+			ID:    "cli-snippets",
+			Title: "CLI Snippet",
+			Labels: Labels{
+				"area": "header",
+				"mime": "text/html",
+			},
 		},
 		Content: Div(
 			H2.Text("Snippets"),

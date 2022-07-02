@@ -6,10 +6,13 @@ import (
 
 func NewPostBeforeIGetStarted() Page {
 	return Page{
-		Meta: PageMeta{
-			Title:  "Before I Get Started",
-			Labels: Labels{"area": "header"},
-			ID:     "before-i-get-started",
+		PageMeta: PageMeta{
+			Title: "Before I Get Started",
+			Labels: Labels{
+				"area": "header",
+				"mime": "text/html",
+			},
+			ID: "before-i-get-started",
 		},
 		Content: Div(
 			H2.Text("Before I Get Started"),
