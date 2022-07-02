@@ -10,7 +10,7 @@ func NewPostPossibleSiteOrg() *HtmlPage {
 			Title: "Possible Site Org",
 			Labels: Labels{
 				"area": "header",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "possible-site-org",
 			},
 		},

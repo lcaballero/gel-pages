@@ -10,7 +10,7 @@ func NewPostBeforeIGetStarted() *HtmlPage {
 			Title: "Before I Get Started",
 			Labels: Labels{
 				"area": "header",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "before-i-get-started",
 			},
 		},

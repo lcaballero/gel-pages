@@ -6,6 +6,16 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
+type MimeTypes struct {
+	Html string
+	Text string
+}
+
+var Mime = MimeType{
+	Html: "text/html",
+	Text: "text/plain",
+}
+
 type WebFile interface {
 	View
 	Meta() PageMeta

@@ -10,7 +10,7 @@ func NewPostCLISnippets() *HtmlPage {
 			Title: "CLI Snippet",
 			Labels: Labels{
 				"area": "header",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "cli-snippets",
 			},
 		},

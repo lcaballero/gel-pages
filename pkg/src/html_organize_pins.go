@@ -10,7 +10,7 @@ func NewPostOrganizingPins() *HtmlPage {
 			Title: "Organizing Pins",
 			Labels: Labels{
 				"area": "aux",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "organizing-pins",
 			},
 		},

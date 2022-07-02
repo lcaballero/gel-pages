@@ -10,7 +10,7 @@ func NewPostSideProjects() *HtmlPage {
 			Title: "Side Projects",
 			Labels: Labels{
 				"area": "header",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "side-projects",
 			},
 		},

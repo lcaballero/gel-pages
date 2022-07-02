@@ -10,7 +10,7 @@ func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
 			Title: "First Steps I Did When Building This Site",
 			Labels: Labels{
 				"area": "draft",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "first-steps-of-building-this-site",
 			},
 		},

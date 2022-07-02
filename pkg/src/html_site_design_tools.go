@@ -10,7 +10,7 @@ func NewPostSiteDesignTools() *HtmlPage {
 			Title: "Site Design Tools",
 			Labels: Labels{
 				"area": "aux",
-				"mime": "text/html",
+				"mime": Mime.Html,
 				"id":   "site-design-tools",
 			},
 		},

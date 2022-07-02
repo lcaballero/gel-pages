@@ -9,7 +9,7 @@ func NewSitemapText() TextPage {
 		Meta: PageMeta{
 			Labels: Labels{
 				"area": "sitemap",
-				"mime": "text/plain",
+				"mime": Mime.Text,
 				"id":   "sitemap.txt",
 			},
 		},
