@@ -1,0 +1,30 @@
+/*
+font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Recursive', sans-serif;
+font-family: 'Roboto', sans-serif;
+
+https://fonts.google.com/specimen/Recursive?preview.text_type=custom#pairings
+
+*/
+@font-face{
+    font-family: "Recursive Black";
+    src: url("/fonts/Recursive-Black.ttf") format("truetype");
+}
+@font-face{
+    font-family: "Recursive Bold";
+    src: url("/fonts/Recursive-Bold.ttf") format("truetype");
+}
+@font-face{
+    font-family: "Recursive Regular";
+    src: url("/fonts/Recursive-Regular.ttf") format("truetype");
+}
+@font-face{
+    font-family: "Recursive Light";
+    src: url("/fonts/Recursive-Light.ttf") format("truetype");
+}
+@font-face{
+    font-family: "Montserrat Regular";
+    src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+}

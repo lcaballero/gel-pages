@@ -1,0 +1,39 @@
+/* ===== footer ===== */
+footer {
+    background-color: #ded8ca;
+    border-top: 2px solid #7d7254;
+    margin-top: 60px;
+}
+footer small {
+    padding-bottom: 20px;
+}
+
+footer > .container {
+    margin-top: 40px;
+}
+
+footer > div > b {
+    padding-bottom: 6px;
+    display: inline-block;
+    font-weight: bold;
+    font-family: "Recursive Regular";
+}
+.container + footer {
+    padding-top: 60px;
+}
+
+footer .aux h3 {
+    font-family: "Recursive Regular";
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+footer .aux li {
+    display: block;
+    margin-bottom: 6px;
+}
+
+footer .aux ul+h3 {
+    margin-top: 40px;
+}

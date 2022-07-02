@@ -1,0 +1,120 @@
+/*========== main ==========*/
+.main {
+    background-color: #fffff4;
+    width: 100%;
+    position: relative;
+}
+.container.shadow {
+    box-shadow: 0 0 40px rgb(71 51 31 / 20%);
+    border: 1px solid #bbb;
+}
+footer .container.shadow {
+    border: 1px solid #aaa;
+}
+.main .container {
+    width: 640px;
+    margin: 0 auto;
+    padding: 40px 60px;
+}
+
+/*========== side-bar ==========*/
+.side-bar {
+    left: 0px;
+    top: 0px;
+    width: 60%;
+}
+.side-bar.container > header {
+    padding: 0px;
+}
+.side-bar.container {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+.side-bar > header {
+    padding: 20px;
+    background-color: #fffff4;
+}
+.side-bar h1 {
+    font-size: 32px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: #333 1px solid;
+    padding-bottom: 2px;
+}
+.side-bar ul {
+    margin-top: 6px;
+}
+.side-bar li {
+    display: inline-block;
+}
+.side-bar li+li {
+    padding-left: 8px;
+}
+
+/*========== prose ==========*/
+.prose {
+    font-family: "Montserrat Regular";
+}
+.prose > h1, .prose > .with-bullets > h1 {
+    font-size: 32px;
+    font-family: "Recursive Regular";
+
+    width: fit-content;
+    margin: auto;
+}
+.prose h1,
+.prose h2 {
+    font-family: "Recursive Regular";
+    margin-bottom: 14px;
+    margin-top: 28px;
+}
+
+.prose h2, .prose h3 {
+    margin-top: 28px;
+}
+.prose h2 {
+    font-size: 24px;
+}
+.prose h3 {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.prose p {
+    margin: 14px 0 14px 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+strong {
+    font-family: "Recursive Bold";
+}
+
+a {
+    font-family: "Recursive Light";
+    font-weight: bold;
+    color: #1E9BCB;
+    color: #24abdf;
+    color: #1b3eb6;
+    color: #1e9bcb;
+}
+
+a:visited, a:link, a:active, a:hover {
+    color: #737D9E;
+    color: #1E9BCB;
+    color: #24abdf;
+    color: #1b3eb6;
+    color: #1e9bcb;
+ }
+
+/* Wrapper for a body with custom bullet styles */
+.with-bullets ul {
+    margin-top:1px;
+}
+.with-bullets ul li {
+    margin-bottom: 8px;
+    list-style-type: disc;
+    list-style-position: inside;
+}

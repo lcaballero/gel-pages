@@ -1,0 +1,16 @@
+.bullet-text {
+    margin: 10px;
+}
+.bullet-text ul {
+    margin: 10px;
+}
+.bullet-text li {
+    margin: 8px;
+}
+.bullet-text li b:first-child {
+    font-weight: bold;
+}
+.bullet-text li > span {
+    display: inline-block;
+    margin-top: 4px;
+}
