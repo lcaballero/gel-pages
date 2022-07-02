@@ -7,10 +7,10 @@ import (
 func NewSitemapText() TextPage {
 	return TextPage{
 		Meta: PageMeta{
-			ID: "sitemap.txt",
 			Labels: Labels{
 				"area": "sitemap",
 				"mime": "text/plain",
+				"id":   "sitemap.txt",
 			},
 		},
 		Content: Frag(Text("Sitemap: https://www.read-later.net/sitemap.txt")),

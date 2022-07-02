@@ -22,8 +22,8 @@ func HandleList(ctx *cli.Context) error {
 			map[string]interface{}{
 				"id":    page.Meta().ID,
 				"title": page.Meta().Title,
-				"path":  path.Join(opts.Root(), page.Meta().ID, "index.html"),
-				"home":  opts.Home() == page.Meta().ID,
+				"path":  path.Join(opts.Root(), page.Meta().ID(), "index.html"),
+				"home":  opts.Home() == page.Meta().ID(),
 			})
 	}
 	bin, err := json.MarshalIndent(vals, "", "  ")
@@ -56,9 +56,9 @@ func HandleWrite(ctx *cli.Context) error {
 	}
 	hasWritenHomePage := false
 	for _, page := range pages {
-		dir := path.Join(opts.Root(), opts.Posts(), page.Meta().ID)
+		dir := path.Join(opts.Root(), opts.Posts(), page.Meta().ID())
 		rootIndex := path.Join(opts.Root(), "index.html")
-		postIndex := path.Join(opts.Root(), opts.Posts(), page.Meta().ID, "index.html")
+		postIndex := path.Join(opts.Root(), opts.Posts(), page.Meta().ID(), "index.html")
 		err := os.MkdirAll(dir, 0755)
 		if err != nil {
 			return err
@@ -71,7 +71,7 @@ func HandleWrite(ctx *cli.Context) error {
 		if hasWritenHomePage {
 			continue
 		}
-		if opts.HasHome() && page.Meta().ID != opts.Home() {
+		if opts.HasHome() && page.Meta().ID() != opts.Home() {
 			continue
 		}
 		err = ioutil.WriteFile(rootIndex, []byte(bin), 0644)

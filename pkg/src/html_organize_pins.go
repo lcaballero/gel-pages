@@ -7,11 +7,11 @@ import (
 func NewPostOrganizingPins() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			ID:    "organizing-pins",
 			Title: "Organizing Pins",
 			Labels: Labels{
 				"area": "aux",
 				"mime": "text/html",
+				"id":   "organizing-pins",
 			},
 		},
 		Content: Div.Class("with-bullets").Add(

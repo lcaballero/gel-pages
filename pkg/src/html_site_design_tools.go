@@ -7,11 +7,11 @@ import (
 func NewPostSiteDesignTools() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			ID:    "site-design-tools",
 			Title: "Site Design Tools",
 			Labels: Labels{
 				"area": "aux",
 				"mime": "text/html",
+				"id":   "site-design-tools",
 			},
 		},
 		Content: Div(

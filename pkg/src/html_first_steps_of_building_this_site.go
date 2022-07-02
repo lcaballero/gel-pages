@@ -7,11 +7,11 @@ import (
 func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			ID:    "first-steps-of-building-this-site",
 			Title: "First Steps I Did When Building This Site",
 			Labels: Labels{
 				"area": "draft",
 				"mime": "text/html",
+				"id":   "first-steps-of-building-this-site",
 			},
 		},
 		Content: Div(

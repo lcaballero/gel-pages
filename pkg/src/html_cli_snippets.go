@@ -7,11 +7,11 @@ import (
 func NewPostCLISnippets() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			ID:    "cli-snippets",
 			Title: "CLI Snippet",
 			Labels: Labels{
 				"area": "header",
 				"mime": "text/html",
+				"id":   "cli-snippets",
 			},
 		},
 		Content: Div(

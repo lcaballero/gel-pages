@@ -11,8 +11,8 @@ func NewPostBeforeIGetStarted() *HtmlPage {
 			Labels: Labels{
 				"area": "header",
 				"mime": "text/html",
+				"id":   "before-i-get-started",
 			},
-			ID: "before-i-get-started",
 		},
 		Content: Div(
 			H2.Text("Before I Get Started"),

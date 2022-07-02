@@ -16,14 +16,14 @@ type WebFile interface {
 type Labels map[string]string
 
 type PageMeta struct {
-	ID      string
 	Version int
 	Title   string
 	Labels  Labels
 }
 
-// func (p PageMeta) ID() string {
-// }
+func (p PageMeta) ID() string {
+	return p.Labels["id"]
+}
 
 type HtmlPage struct {
 	PageMeta     PageMeta

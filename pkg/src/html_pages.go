@@ -26,7 +26,7 @@ func NewPages() HtmlPages {
 }
 
 func (p HtmlPages) Add(page WebFile) {
-	p[page.Meta().ID] = page
+	p[page.Meta().ID()] = page
 }
 
 func (p HtmlPages) ToDebug() Debug {
