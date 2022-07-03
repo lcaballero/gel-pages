@@ -7,8 +7,8 @@ import (
 func NewPostPossibleSiteOrg() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "Possible Site Org",
 			Labels: NewLabels().
+				Add("title", "Possible Site Org").
 				Add("area", "header").
 				Add("mime", Mime.Html).
 				Add("id", "possible-site-org").

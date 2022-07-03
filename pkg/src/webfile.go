@@ -31,7 +31,6 @@ type WebFile interface {
 type PageMeta struct {
 	Labels
 	Version int
-	Title   string
 }
 
 type HtmlPage struct {
@@ -69,8 +68,8 @@ func (p *HtmlPage) ToNode() *Node {
 				Def(p.Styles, BaseCSS),
 				Def(p.Scripts, BaseJS),
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
-				Meta.Atts("name", "title", "content", p.Meta().Title),
-				Title(Def(p.Meta().Title, p.Meta().Title)),
+				Meta.Atts("name", "title", "content", p.Meta().Title()),
+				Title(Def(p.Meta().Title(), p.Meta().Title())),
 			),
 			Body(
 				Div.Class("main").Add(

@@ -7,8 +7,8 @@ import (
 func NewPostGoogleAnalytics() *TextPage {
 	return &TextPage{
 		PageMeta: PageMeta{
-			Title: "google-analytics",
 			Labels: NewLabels().
+				Add("title", "google-analytics").
 				Add("area", "analytics").
 				Add("mime", Mime.Html).
 				Add("id", "google5d223b9b91f70029.html").

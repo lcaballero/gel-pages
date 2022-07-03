@@ -27,7 +27,7 @@ func HandleList(ctx *cli.Context) error {
 		vals = append(vals,
 			map[string]interface{}{
 				"id":     page.Meta().ID(),
-				"title":  page.Meta().Title,
+				"title":  page.Meta().Title(),
 				"path":   file,
 				"home":   page.Meta().IsHome(),
 				"rooted": page.Meta().IsRooted(),

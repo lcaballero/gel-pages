@@ -7,8 +7,8 @@ import (
 func NewPostBeforeIGetStarted() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "Before I Get Started",
 			Labels: NewLabels().
+				Add("title", "Before I Get Started").
 				Add("area", "header").
 				Add("mime", Mime.Html).
 				Add("id", "before-i-get-started").

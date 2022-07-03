@@ -7,8 +7,8 @@ import (
 func NewPostSideProjects() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "Side Projects",
 			Labels: NewLabels().
+				Add("title", "Side Projects").
 				Add("area", "header").
 				Add("mime", Mime.Html).
 				Add("id", "side-projects").

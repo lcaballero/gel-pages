@@ -7,8 +7,8 @@ import (
 func NewPostSiteDesignTools() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "Site Design Tools",
 			Labels: NewLabels().
+				Add("title", "Site Design Tools").
 				Add("area", "aux").
 				Add("mime", Mime.Html).
 				Add("id", "site-design-tools").

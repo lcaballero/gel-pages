@@ -67,7 +67,7 @@ func (p WebFileLookup) ToDebug() Debug {
 			pages,
 			map[string]interface{}{
 				"id":     id,
-				"title":  page.Meta().Title,
+				"title":  page.Meta().Title(),
 				"labels": page.Meta().Labels,
 			})
 	}

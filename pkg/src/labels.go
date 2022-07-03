@@ -25,6 +25,7 @@ func (labels Labels) Location() string {
 	return strings.TrimSpace(v)
 }
 
+// Add puts the key value pair in the labels set
 func (labels Labels) Add(key, val string) Labels {
 	labels.pairs[key] = val
 	return labels
@@ -34,6 +35,12 @@ func (labels Labels) Add(key, val string) Labels {
 // exist it returns and empty string
 func (labels Labels) ID() string {
 	return labels.pairs["id"]
+}
+
+// Title accesses the "title" label and if the key does not
+// exist it returns the empty string
+func (labels Labels) Title() string {
+	return labels.pairs["title"]
 }
 
 // IsPost returns true if the underlying label for "stage" includes

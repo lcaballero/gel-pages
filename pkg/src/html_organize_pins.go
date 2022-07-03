@@ -7,8 +7,8 @@ import (
 func NewPostOrganizingPins() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "Organizing Pins",
 			Labels: NewLabels().
+				Add("title", "Organizing Pins").
 				Add("area", "aux").
 				Add("mime", Mime.Html).
 				Add("id", "organizing-pins").

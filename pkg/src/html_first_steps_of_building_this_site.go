@@ -7,8 +7,8 @@ import (
 func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "First Steps I Did When Building This Site",
 			Labels: NewLabels().
+				Add("title", "First Steps I Did When Building This Site").
 				Add("area", "draft").
 				Add("mime", Mime.Html).
 				Add("id", "first-steps-of-building-this-site").

@@ -19,18 +19,18 @@ func Test_Labels_IsRooted(t *testing.T) {
 		},
 		{
 			msg:      "home page is rooted file",
-			labels:   Labels{"location": "/index.html"},
+			labels:   NewLabels().Add("location", "/index.html"),
 			expected: true,
 			isHome:   true,
 		},
 		{
 			msg:      "robots is rooted file",
-			labels:   Labels{"location": "/robots.txt"},
+			labels:   NewLabels().Add("location", "/robots.txt"),
 			expected: true,
 		},
 		{
 			msg:      "not in the set of rooted files",
-			labels:   Labels{"location": "/some-home.html"},
+			labels:   NewLabels().Add("location", "/some-home.html"),
 			expected: false,
 		},
 	}
@@ -53,17 +53,13 @@ func Test_Labels_IsPost(t *testing.T) {
 			expected: false,
 		},
 		{
-			msg: "stage not 'post', not a post",
-			labels: Labels{
-				"stage": "draft",
-			},
+			msg:      "stage not 'post', not a post",
+			labels:   NewLabels().Add("stage", "draft"),
 			expected: false,
 		},
 		{
-			msg: "stage is post, is a post",
-			labels: Labels{
-				"stage": "post",
-			},
+			msg:      "stage is post, is a post",
+			labels:   NewLabels().Add("stage", "post"),
 			expected: true,
 		},
 	}
@@ -85,17 +81,13 @@ func Test_Labels_Location(t *testing.T) {
 			expected: "",
 		},
 		{
-			msg: "location only whitespace",
-			labels: Labels{
-				"location": "   \n",
-			},
+			msg:      "location only whitespace",
+			labels:   NewLabels().Add("location", "   \n"),
 			expected: "",
 		},
 		{
-			msg: "location has a typical value",
-			labels: Labels{
-				"location": "/index.html",
-			},
+			msg:      "location has a typical value",
+			labels:   NewLabels().Add("location", "/index.html"),
 			expected: "/index.html",
 		},
 	}

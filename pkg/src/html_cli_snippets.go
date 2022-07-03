@@ -7,8 +7,8 @@ import (
 func NewPostCLISnippets() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
-			Title: "CLI Snippet",
 			Labels: NewLabels().
+				Add("title", "CLI Snippet").
 				Add("area", "header").
 				Add("mime", Mime.Html).
 				Add("id", "cli-snippets").
