@@ -8,13 +8,12 @@ func NewPostBeforeIGetStarted() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "Before I Get Started",
-			Labels: Labels{
-				"area":     "header",
-				"mime":     Mime.Html,
-				"id":       "before-i-get-started",
-				"location": "/index.html",
-				"stage":    "post",
-			},
+			Labels: NewLabels().
+				Add("area", "header").
+				Add("mime", Mime.Html).
+				Add("id", "before-i-get-started").
+				Add("location", "/index.html").
+				Add("stage", "post"),
 		},
 		Content: Div(
 			H2.Text("Before I Get Started"),

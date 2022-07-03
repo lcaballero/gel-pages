@@ -8,12 +8,11 @@ func NewPostOrganizingPins() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "Organizing Pins",
-			Labels: Labels{
-				"area":  "aux",
-				"mime":  Mime.Html,
-				"id":    "organizing-pins",
-				"stage": "post",
-			},
+			Labels: NewLabels().
+				Add("area", "aux").
+				Add("mime", Mime.Html).
+				Add("id", "organizing-pins").
+				Add("stage", "post"),
 		},
 		Content: Div.Class("with-bullets").Add(
 			H2.Text(`Organizing Pins`),

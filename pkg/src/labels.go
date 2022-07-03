@@ -16,6 +16,15 @@ func (labels Labels) Location() string {
 	return strings.TrimSpace(v)
 }
 
+func NewLabels() Labels {
+	return Labels{}
+}
+
+func (labels Labels) Add(key, val string) Labels {
+	labels[key] = val
+	return labels
+}
+
 // ID accesses of the "id" key and if the key does not
 // exist it returns and empty string
 func (labels Labels) ID() string {

@@ -13,10 +13,8 @@ Can be an advice for 'compilation-start'."
 
 (defun tools-load ()
   (interactive)
-  (let ((default-directory (locate-dominating-file buffer-file-name ".dir-locals.el"))
-        (tools-file (format "%s.tools.el" default-directory)))
-    (load tools-file)
-    (message "reloaded '%s'" tools-file)))
+  (let ((tools-directory (locate-dominating-file buffer-file-name ".dir-locals.el")))
+    (load (format "%s.tools.el" tools-directory))))
 
 (defun region-to-inserted (first second)
   (narrow-to-region beg end)
@@ -51,14 +49,27 @@ Can be an advice for 'compilation-start'."
   (interactive)
   (find-file "~/.emacs.d/setup.org"))
 
+(defun tools-edit-line ()
+  (interactive)
+  (let* ((line0 (buffer-substring-no-properties
+                       (line-beginning-position) (line-end-position)))
+         (line1 (s-replace-regexp "," ")." line0))
+         (line2 (s-replace-regexp ":" "," line1))
+         (line3 (s-replace-regexp "^" "Add(" line2)))
+    (delete-region
+     (line-beginning-position)
+     (line-end-position))
+    (insert line3)
+    ))
+
 (defhydra local-tools-hydra (:color pink :hint nil)
   "
 
 ^Go Element (gel)^            ^Boilerplates^         ^Tools^
 ----------------------------------------------------------
-_i_: make Text() of region    _b_: bash file         _r_: reload local .tools.el   
+_i_: make Text() of region    _b_: bash file         _r_: reload local .tools.el
 _p_: make P() tag of region   _d_: bash $DIR         _o_: open setup.org
-_m_: make XLink() of region   _h_: go http handler
+_m_: make XLink() of region   _h_: go http handler   _l_: run tools defun
 _c_: make Code() of region    _t_: go test file
 
 "
@@ -78,7 +89,8 @@ _c_: make Code() of region    _t_: go test file
   ;; Tools
   ("r" tools-load nil)
   ("o" open-setup-org nil)
-  
+  ("l" tools-edit-line nil)
+
   ("q" nil "quit")
   )
 

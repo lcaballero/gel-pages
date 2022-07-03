@@ -8,12 +8,11 @@ func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
 	return &HtmlPage{
 		PageMeta: PageMeta{
 			Title: "First Steps I Did When Building This Site",
-			Labels: Labels{
-				"area":  "draft",
-				"mime":  Mime.Html,
-				"id":    "first-steps-of-building-this-site",
-				"stage": "post",
-			},
+			Labels: NewLabels().
+				Add("area", "draft").
+				Add("mime", Mime.Html).
+				Add("id", "first-steps-of-building-this-site").
+				Add("stage", "post"),
 		},
 		Content: Div(
 			H2.Text(`The Steps I Did When Building This Site`),
