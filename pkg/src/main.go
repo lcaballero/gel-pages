@@ -15,7 +15,7 @@ import (
 
 func HandleList(ctx *cli.Context) error {
 	opts := DefaultListOpts(ctx)
-	pages := NewPages(opts)
+	pages := NewWebFileLookup(opts)
 	vals := []map[string]interface{}{}
 	for _, page := range pages {
 		file := path.Join(
@@ -43,7 +43,7 @@ func HandleList(ctx *cli.Context) error {
 
 func HandleGen(ctx *cli.Context) error {
 	opts := DefaultGenOpts(ctx)
-	pages := NewPages(opts)
+	pages := NewWebFileLookup(opts)
 	p, ok := pages[opts.Id()]
 	if !ok {
 		log.Fatalf("not found id:'%s'", opts.Id())
@@ -57,7 +57,7 @@ func HandleGen(ctx *cli.Context) error {
 
 func HandleWrite(ctx *cli.Context) error {
 	opts := DefaultWriteOpts(ctx)
-	pages := NewPages(opts)
+	pages := NewWebFileLookup(opts)
 	if !opts.HasRoot() {
 		return fmt.Errorf("output directory flag: '--root' is required")
 	}

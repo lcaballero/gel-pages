@@ -15,7 +15,7 @@ var (
 	Loc    = El("loc", false)
 )
 
-func NewXmlSitemap(loc Locator, pages HtmlPages) *TextPage {
+func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	urls := []string{}
 	for _, page := range pages {
 		if page.Meta().IsRooted() && !page.Meta().IsHome() {

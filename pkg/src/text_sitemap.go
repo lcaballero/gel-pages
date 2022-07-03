@@ -9,7 +9,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewTextSitemap(loc Locator, pages HtmlPages) *TextPage {
+func NewTextSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	urls := []string{}
 	for _, page := range pages {
 		if page.Meta().IsRooted() && !page.Meta().IsHome() {
