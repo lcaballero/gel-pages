@@ -4,37 +4,42 @@ import "strings"
 
 // Labels reference name/value pairs that can be associated with
 // assets
-type Labels map[string]string
+type Labels struct {
+	pairs map[string]string
+}
+
+// NewLabels returns a new empty instance of Labels
+func NewLabels() Labels {
+	return Labels{
+		pairs: map[string]string{},
+	}
+}
 
 // Location accesses of the "location" key and if the key does not
 // exist it returns and empty string
 func (labels Labels) Location() string {
-	v, ok := labels["location"]
+	v, ok := labels.pairs["location"]
 	if !ok {
 		return ""
 	}
 	return strings.TrimSpace(v)
 }
 
-func NewLabels() Labels {
-	return Labels{}
-}
-
 func (labels Labels) Add(key, val string) Labels {
-	labels[key] = val
+	labels.pairs[key] = val
 	return labels
 }
 
 // ID accesses of the "id" key and if the key does not
 // exist it returns and empty string
 func (labels Labels) ID() string {
-	return labels["id"]
+	return labels.pairs["id"]
 }
 
 // IsPost returns true if the underlying label for "stage" includes
 // "post"
 func (labels Labels) IsPost() bool {
-	val, ok := labels["stage"]
+	val, ok := labels.pairs["stage"]
 	return ok && val == "post"
 }
 

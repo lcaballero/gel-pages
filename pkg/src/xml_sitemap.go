@@ -38,12 +38,11 @@ func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	xml = strings.ReplaceAll(xml, "url></urlset", "url>\n</urlset")
 	return &TextPage{
 		PageMeta: PageMeta{
-			Labels: Labels{
-				"area":     "sitemap",
-				"mime":     Mime.Xml,
-				"id":       "sitemap.xml",
-				"location": "/sitemap.xml",
-			},
+			Labels: NewLabels().
+				Add("area", "sitemap").
+				Add("mime", Mime.Xml).
+				Add("id", "sitemap.xml").
+				Add("location", "/sitemap.xml"),
 		},
 		Content: Frag(
 			Text(`<?xml version="1.0" encoding="UTF-8"?>`),

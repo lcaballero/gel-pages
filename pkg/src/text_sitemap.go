@@ -27,12 +27,11 @@ func NewTextSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	}
 	return &TextPage{
 		PageMeta: PageMeta{
-			Labels: Labels{
-				"area":     "sitemap",
-				"mime":     Mime.Text,
-				"id":       "sitemap.txt",
-				"location": "/sitemap.txt",
-			},
+			Labels: NewLabels().
+				Add("area", "sitemap").
+				Add("mime", Mime.Text).
+				Add("id", "sitemap.txt").
+				Add("location", "/sitemap.txt"),
 		},
 		Content: Text(buf.String()),
 	}
