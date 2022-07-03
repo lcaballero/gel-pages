@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 // Labels reference name/value pairs that can be associated with
 // assets
 type Labels map[string]string
@@ -7,7 +9,11 @@ type Labels map[string]string
 // Location accesses of the "location" key and if the key does not
 // exist it returns and empty string
 func (labels Labels) Location() string {
-	return labels["location"]
+	v, ok := labels["location"]
+	if !ok {
+		return ""
+	}
+	return strings.TrimSpace(v)
 }
 
 // ID accesses of the "id" key and if the key does not
