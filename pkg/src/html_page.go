@@ -9,11 +9,13 @@ import (
 type MimeTypes struct {
 	Html string
 	Text string
+	Xml  string
 }
 
-var Mime = MimeType{
+var Mime = MimeTypes{
 	Html: "text/html",
 	Text: "text/plain",
+	Xml:  "application/xml",
 }
 
 type WebFile interface {
@@ -25,14 +27,41 @@ type WebFile interface {
 
 type Labels map[string]string
 
-type PageMeta struct {
-	Version int
-	Title   string
-	Labels  Labels
+func (labels Labels) Location() string {
+	return labels["location"]
 }
 
-func (p PageMeta) ID() string {
-	return p.Labels["id"]
+func (labels Labels) ID() string {
+	return labels["id"]
+}
+
+func (labels Labels) IsPost() bool {
+	val, ok := labels["stage"]
+	return ok && val == "post"
+}
+
+func (labels Labels) IsRooted() bool {
+	switch labels.Location() {
+	case "/index.html", "/sitemap.txt", "/sitemap.xml", "/robots.txt", "/google5d223b9b91f70029.html":
+		return true
+	default:
+		return false
+	}
+}
+
+func (labels Labels) IsHome() bool {
+	switch labels.Location() {
+	case "/index.html":
+		return true
+	default:
+		return false
+	}
+}
+
+type PageMeta struct {
+	Labels
+	Version int
+	Title   string
 }
 
 type HtmlPage struct {

@@ -11,9 +11,15 @@ func PostNotImplementedYet(page string) gel.View {
 	return nil
 }
 
+type Locator interface {
+	Root() string
+	Posts() string
+	Base() string
+}
+
 type HtmlPages map[string]WebFile
 
-func NewPages() HtmlPages {
+func NewPages(loc Locator) HtmlPages {
 	pages := HtmlPages{}
 	pages.Add(NewPostBeforeIGetStarted())
 	pages.Add(NewPostSideProjects())
@@ -22,6 +28,15 @@ func NewPages() HtmlPages {
 	pages.Add(NewPostSiteDesignTools())
 	pages.Add(NewPostOrganizingPins())
 	pages.Add(NewPostFirstStepsOfBuildingThisSite())
+
+	// These require page names and path information
+	site0 := NewTextSitemap(loc, pages)
+	site1 := NewXmlSitemap(loc, pages)
+	robot := NewTextRobots()
+
+	pages.Add(site0)
+	pages.Add(site1)
+	pages.Add(robot)
 	return pages
 }
 

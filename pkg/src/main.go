@@ -14,16 +14,23 @@ import (
 //go:generate bash ./gen.sh
 
 func HandleList(ctx *cli.Context) error {
-	pages := NewPages()
 	opts := DefaultListOpts(ctx)
+	pages := NewPages(opts)
 	vals := []map[string]interface{}{}
 	for _, page := range pages {
+		file := path.Join(
+			opts.Root(), opts.Posts(), page.Meta().ID(),
+			"index.html")
+		if page.Meta().IsRooted() {
+			file = path.Join(opts.Root(), page.Meta().Location())
+		}
 		vals = append(vals,
 			map[string]interface{}{
-				"id":    page.Meta().ID,
-				"title": page.Meta().Title,
-				"path":  path.Join(opts.Root(), page.Meta().ID(), "index.html"),
-				"home":  opts.Home() == page.Meta().ID(),
+				"id":     page.Meta().ID(),
+				"title":  page.Meta().Title,
+				"path":   file,
+				"home":   page.Meta().IsHome(),
+				"rooted": page.Meta().IsRooted(),
 			})
 	}
 	bin, err := json.MarshalIndent(vals, "", "  ")
@@ -35,8 +42,8 @@ func HandleList(ctx *cli.Context) error {
 }
 
 func HandleGen(ctx *cli.Context) error {
-	pages := NewPages()
 	opts := DefaultGenOpts(ctx)
+	pages := NewPages(opts)
 	p, ok := pages[opts.Id()]
 	if !ok {
 		log.Fatalf("not found id:'%s'", opts.Id())
@@ -50,35 +57,30 @@ func HandleGen(ctx *cli.Context) error {
 
 func HandleWrite(ctx *cli.Context) error {
 	opts := DefaultWriteOpts(ctx)
-	pages := NewPages()
+	pages := NewPages(opts)
 	if !opts.HasRoot() {
 		return fmt.Errorf("output directory flag: '--root' is required")
 	}
-	hasWritenHomePage := false
 	for _, page := range pages {
 		dir := path.Join(opts.Root(), opts.Posts(), page.Meta().ID())
-		rootIndex := path.Join(opts.Root(), "index.html")
-		postIndex := path.Join(opts.Root(), opts.Posts(), page.Meta().ID(), "index.html")
-		err := os.MkdirAll(dir, 0755)
-		if err != nil {
-			return err
+		if page.Meta().IsPost() {
+			err := os.MkdirAll(dir, 0755)
+			if err != nil {
+				return err
+			}
+			postIndex := path.Join(dir, "index.html")
+			err = ioutil.WriteFile(postIndex, []byte(page.Bytes()), 0644)
+			if err != nil {
+				return err
+			}
 		}
-		bin := page.Bytes()
-		err = ioutil.WriteFile(postIndex, []byte(bin), 0644)
-		if err != nil {
-			return err
+		if page.Meta().IsRooted() {
+			index := path.Join(opts.Root(), page.Meta().Location())
+			err := ioutil.WriteFile(index, []byte(page.Bytes()), 0644)
+			if err != nil {
+				return err
+			}
 		}
-		if hasWritenHomePage {
-			continue
-		}
-		if opts.HasHome() && page.Meta().ID() != opts.Home() {
-			continue
-		}
-		err = ioutil.WriteFile(rootIndex, []byte(bin), 0644)
-		if err != nil {
-			return err
-		}
-		hasWritenHomePage = true
 	}
 	return nil
 }

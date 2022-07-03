@@ -1,21 +1,21 @@
 #!/bin/bash
 set -e
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 # build create
 build() {
-  rm -rf "$(pwd)/.dist" \
-     && mkdir -p .dist \
-     && cp -r pkg/www/html/assets/{css,fonts,img,js} .dist \
-     && (cd pkg/src && go generate ./...) \
-     && (cd pkg/src && go install)
+  rm -rf "$DIR/.dist" \
+     && mkdir -p "$DIR/.dist" \
+     && (cd "$DIR" && cp -r pkg/www/html/assets/{css,fonts,img,js} "$DIR/.dist") \
+     && (cd "$DIR/pkg/src" && go generate ./... && go install)
 }
 
 dist() {
-  build && \
-    gel-pages write \
-              --root .dist \
-              --posts posts \
-              --home before-i-get-started
+  build && gel-pages write \
+                     --root .dist \
+                     --posts posts \
+                     --base "https://www.read-later.net"
 }
 
 list() {
@@ -29,7 +29,7 @@ local-module() {
 }
 
 gen::files() {
-  find . -type f -name '*.gen.go'
+  find "$DIR" -type f -name '*.gen.go'
 }
 
 gen::clean() {
@@ -38,4 +38,3 @@ gen::clean() {
 
 
 "$@"
-

@@ -9,9 +9,10 @@ func NewPostSiteDesignTools() *HtmlPage {
 		PageMeta: PageMeta{
 			Title: "Site Design Tools",
 			Labels: Labels{
-				"area": "aux",
-				"mime": Mime.Html,
-				"id":   "site-design-tools",
+				"area":  "aux",
+				"mime":  Mime.Html,
+				"id":    "site-design-tools",
+				"stage": "post",
 			},
 		},
 		Content: Div(

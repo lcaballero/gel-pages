@@ -9,9 +9,10 @@ func NewPostCLISnippets() *HtmlPage {
 		PageMeta: PageMeta{
 			Title: "CLI Snippet",
 			Labels: Labels{
-				"area": "header",
-				"mime": Mime.Html,
-				"id":   "cli-snippets",
+				"area":  "header",
+				"mime":  Mime.Html,
+				"id":    "cli-snippets",
+				"stage": "post",
 			},
 		},
 		Content: Div(

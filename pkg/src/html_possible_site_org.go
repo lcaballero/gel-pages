@@ -9,9 +9,10 @@ func NewPostPossibleSiteOrg() *HtmlPage {
 		PageMeta: PageMeta{
 			Title: "Possible Site Org",
 			Labels: Labels{
-				"area": "header",
-				"mime": Mime.Html,
-				"id":   "possible-site-org",
+				"area":  "header",
+				"mime":  Mime.Html,
+				"id":    "possible-site-org",
+				"stage": "post",
 			},
 		},
 		Content: Div(

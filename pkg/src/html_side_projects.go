@@ -9,9 +9,10 @@ func NewPostSideProjects() *HtmlPage {
 		PageMeta: PageMeta{
 			Title: "Side Projects",
 			Labels: Labels{
-				"area": "header",
-				"mime": Mime.Html,
-				"id":   "side-projects",
+				"area":  "header",
+				"mime":  Mime.Html,
+				"id":    "side-projects",
+				"stage": "post",
 			},
 		},
 		Content: Div(

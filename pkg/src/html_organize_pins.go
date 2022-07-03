@@ -9,9 +9,10 @@ func NewPostOrganizingPins() *HtmlPage {
 		PageMeta: PageMeta{
 			Title: "Organizing Pins",
 			Labels: Labels{
-				"area": "aux",
-				"mime": Mime.Html,
-				"id":   "organizing-pins",
+				"area":  "aux",
+				"mime":  Mime.Html,
+				"id":    "organizing-pins",
+				"stage": "post",
 			},
 		},
 		Content: Div.Class("with-bullets").Add(
