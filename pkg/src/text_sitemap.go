@@ -34,6 +34,6 @@ func NewTextSitemap(loc Locator, pages HtmlPages) *TextPage {
 				"location": "/sitemap.txt",
 			},
 		},
-		Content: Frag(Text(buf.String())),
+		Content: Text(buf.String()),
 	}
 }

@@ -8,12 +8,12 @@ func NewTextRobots() *TextPage {
 	return &TextPage{
 		PageMeta: PageMeta{
 			Labels: Labels{
-				"area":     "google-site-verification",
+				"area":     "robots.txt",
 				"mime":     Mime.Text,
-				"id":       "google5d223b9b91f70029.html",
-				"location": "/google5d223b9b91f70029.html",
+				"id":       "robots.txt",
+				"location": "/robots.txt",
 			},
 		},
-		Content: Frag(Text("google-site-verification: google5d223b9b91f70029.html")),
+		Content: Text("Sitemap: https://www.read-later.net/sitemap.txt"),
 	}
 }

@@ -33,10 +33,12 @@ func NewPages(loc Locator) HtmlPages {
 	site0 := NewTextSitemap(loc, pages)
 	site1 := NewXmlSitemap(loc, pages)
 	robot := NewTextRobots()
+	ga := NewPostGoogleAnalytics()
 
 	pages.Add(site0)
 	pages.Add(site1)
 	pages.Add(robot)
+	pages.Add(ga)
 	return pages
 }
 
