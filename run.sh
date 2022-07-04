@@ -36,5 +36,4 @@ gen::clean() {
   gen::files | xargs rm
 }
 
-
 "$@"

@@ -1,0 +1,56 @@
+#!/bin/bash
+set -e
+
+HOST="www.read-later.net"
+WWW_DIR="/var/www/$HOST"
+
+pack-up() {
+    tar -cf dist.tar.gz -C .dist .
+}
+
+push-out() {
+    scp dist.tar.gz ./deploy root@ssh.read-later.net:
+}
+
+publish() {
+    ssh root@ssh.read-later.net ./deploy unpack
+}
+
+unpack() {
+    place
+    systemctl restart nginx
+}
+
+clean() {
+    rm -rf "$WWW_DIR" dist.tar.gz
+}
+
+place() {
+    local well_known="$WWW_DIR/.well-known/nginx/up"
+    rm -rf /root/dist
+    mkdir -p /root/dist
+    cd /root/dist
+
+    #TODO: uncompress dist contents into the dist directory
+    mv ../dist.tar.gz .
+    tar -xf dist.tar.gz
+    rm -f dist.tar.gz
+    rm -rf "/var/www/$HOST"
+
+    cd /root
+    cp -r /root/dist "$WWW_DIR"
+
+    mkdir -p "$well_known"
+    cp up.index.html "$well_known/index.html"
+}
+
+www() {
+    clean && pack-up && push-out && publish
+}
+
+if [ -z "$1" ]; then
+    echo "deploying application"
+    www
+else
+    "$@"
+fi

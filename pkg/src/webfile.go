@@ -6,18 +6,6 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-type MimeTypes struct {
-	Html string
-	Text string
-	Xml  string
-}
-
-var Mime = MimeTypes{
-	Html: "text/html",
-	Text: "text/plain",
-	Xml:  "application/xml",
-}
-
 // WebFile represents the HTML, Text, or XML that can be written to
 // disk and is capable of rendering additional debug information as
 // well
@@ -87,6 +75,7 @@ func (p *HtmlPage) ToNode() *Node {
 	).ToNode()
 }
 
+// String turns the HtmlPage into a single string of HTML
 func (p HtmlPage) String() string {
 	if p.UseIndention {
 		indent := NewIndent()
@@ -97,6 +86,7 @@ func (p HtmlPage) String() string {
 	return p.ToNode().String()
 }
 
+// Bytes is similar to String which renders the HTML without indention
 func (p HtmlPage) Bytes() []byte {
 	if p.UseIndention {
 		indent := NewIndent()

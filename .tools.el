@@ -59,39 +59,81 @@ Can be an advice for 'compilation-start'."
     (delete-region
      (line-beginning-position)
      (line-end-position))
-    (insert line3)
-    ))
+    (insert line3)))
 
-(defhydra local-tools-hydra (:color pink :hint nil)
+(defun sed-on-string (s &rest args)
+  (while args
+    (let ((re (first args))
+          (sub (second args))
+          (rest (nthcdr 2 args)))
+      (setq args rest)
+      (setq s (s-replace-regexp re sub s))))
+  s)
+
+;; (sed-on-string "       \"title\": mime.HTML,"
+;;                "," ")."
+;;                ":" ","
+;;                "^ *" ""
+;;                "^" "Add(")
+
+(defun tools-deploy-shell-command (cmd arg)
+  (let* ((tools-directory (locate-dominating-file buffer-file-name ".dir-locals.el"))
+         (tools-command (format "%s%s %s" tools-directory cmd arg)))
+    (message "site: www.read-later.net, directory: %s, command: %s"
+             tools-directory
+             tools-command)
+    (shell-command tools-command)))
+
+(defun tools-deploy-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "deploy" "www"))
+
+(defun tools-dist-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "run.sh" "dist"))
+
+(defun tools-build-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "run.sh" "build"))
+
+(defun tools-clean-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "deploy" "clean"))
+
+(defhydra local-tools-hydra (:color pink :hint nil :exit t)
   "
-
 ^Go Element (gel)^            ^Boilerplates^         ^Tools^
-----------------------------------------------------------
-_i_: make Text() of region    _b_: bash file         _r_: reload local .tools.el
-_p_: make P() tag of region   _d_: bash $DIR         _o_: open setup.org
-_m_: make XLink() of region   _h_: go http handler   _l_: run tools defun
-_c_: make Code() of region    _t_: go test file
+---------------------------------------------------------------------------------------------------------
+_i_: make Text() of region    _B_: bash file         _r_: reload local .tools.el
+_p_: make P() tag of region   _D_: bash $DIR         _o_: open setup.org
+_m_: make XLink() of region   _H_: go http handler   _l_: run key/val to Add()
+_o_: make Code() of region    _T_: go test file      ^ ^
+^ ^                           ^ ^                    _w_: ./deploy www
+^ ^                           ^ ^                    _c_: ./deploy clean
+^ ^                           ^ ^                    _d_: ./run.sh dist
+^ ^                           ^ ^                    _b_: ./run.sh build
 
 "
-
   ;; Go Element (gel)
   ("i" region-to-insert-in-text nil)
   ("p" region-to-p-tag nil)
   ("m" region-to-xlink-tag nil)
-  ("c" region-to-code-tag nil)
-
+  ("o" region-to-code-tag nil)
   ;; Boilerplates
-  ("b" tmpl-new-bash nil)
-  ("h" tmpl-go-http-handler-func nil)
-  ("t" tmpl-go-new-test-file nil)
-  ("d" tmpl-script-dir nil)
-
+  ("B" tmpl-new-bash nil)
+  ("D" tmpl-script-dir nil)
+  ("H" tmpl-go-http-handler-func nil)
+  ("T" tmpl-go-new-test-file nil)
   ;; Tools
   ("r" tools-load nil)
   ("o" open-setup-org nil)
   ("l" tools-edit-line nil)
+  ;; --------------------------------------------
+  ("w" tools-deploy-read-later-net nil)
+  ("c" tools-clean-read-later-net nil)
+  ("d" tools-dist-read-later-net nil)
+  ("b" tools-build-read-later-net nil)
 
-  ("q" nil "quit")
-  )
+  ("q" nil "quit"))
 
 (global-set-key (kbd "C-c C-v") 'local-tools-hydra/body)
