@@ -7,7 +7,7 @@ import (
 )
 
 type TextPage struct {
-	*Labels
+	Labels
 	Content View
 }
 

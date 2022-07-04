@@ -27,7 +27,7 @@ type WebFile interface {
 }
 
 type HtmlPage struct {
-	*Labels
+	Labels
 	Scripts      Viewable
 	Styles       Viewable
 	Description  View

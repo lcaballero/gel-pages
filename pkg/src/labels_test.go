@@ -9,7 +9,7 @@ import (
 func Test_Labels_IsRooted(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   *Labels
+		labels   Labels
 		expected bool
 		isHome   bool
 	}{
@@ -47,7 +47,7 @@ func Test_Labels_IsRooted(t *testing.T) {
 func Test_Labels_IsPost(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   *Labels
+		labels   Labels
 		expected bool
 	}{
 		{
@@ -76,7 +76,7 @@ func Test_Labels_IsPost(t *testing.T) {
 func Test_Labels_Location(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   *Labels
+		labels   Labels
 		expected string
 	}{
 		{
