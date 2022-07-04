@@ -84,10 +84,6 @@ Can be an advice for 'compilation-start'."
              tools-command)
     (shell-command tools-command)))
 
-(defun tools-deploy-read-later-net ()
-  (interactive)
-  (tools-deploy-shell-command "deploy" "www"))
-
 (defun tools-dist-read-later-net ()
   (interactive)
   (tools-deploy-shell-command "run.sh" "dist"))
@@ -95,6 +91,14 @@ Can be an advice for 'compilation-start'."
 (defun tools-build-read-later-net ()
   (interactive)
   (tools-deploy-shell-command "run.sh" "build"))
+
+(defun tools-tests-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "run.sh" "tests"))
+
+(defun tools-deploy-read-later-net ()
+  (interactive)
+  (tools-deploy-shell-command "deploy" "www"))
 
 (defun tools-clean-read-later-net ()
   (interactive)
@@ -112,6 +116,7 @@ _o_: make Code() of region    _T_: go test file      ^ ^
 ^ ^                           ^ ^                    _c_: ./deploy clean
 ^ ^                           ^ ^                    _d_: ./run.sh dist
 ^ ^                           ^ ^                    _b_: ./run.sh build
+^ ^                           ^ ^                    _t_: ./run.sh tests
 
 "
   ;; Go Element (gel)
@@ -133,7 +138,8 @@ _o_: make Code() of region    _T_: go test file      ^ ^
   ("c" tools-clean-read-later-net nil)
   ("d" tools-dist-read-later-net nil)
   ("b" tools-build-read-later-net nil)
-
+  ("t" tools-tests-read-later-net nil)
+  
   ("q" nil "quit"))
 
 (global-set-key (kbd "C-c C-v") 'local-tools-hydra/body)

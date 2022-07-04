@@ -12,10 +12,10 @@ import (
 func NewTextSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	urls := []string{}
 	for _, page := range pages {
-		if page.Meta().IsRooted() && !page.Meta().IsHome() {
+		if page.IsRooted() && !page.IsHome() {
 			continue
 		}
-		filepath := path.Join(loc.Posts(), page.Meta().ID())
+		filepath := path.Join(loc.Posts(), page.ID())
 		file := fmt.Sprintf("%s/%s/", loc.Base(), filepath)
 		urls = append(urls, file)
 	}
@@ -26,13 +26,11 @@ func NewTextSitemap(loc Locator, pages WebFileLookup) *TextPage {
 		buf.WriteString("\n")
 	}
 	return &TextPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("area", "sitemap").
-				Add("mime", Mime.Text).
-				Add("id", "sitemap.txt").
-				Add("location", "/sitemap.txt"),
-		},
+		Labels: NewLabels().
+			Add("area", "sitemap").
+			Add("mime", Mime.Text).
+			Add("id", "sitemap.txt").
+			Add("location", "/sitemap.txt"),
 		Content: Text(buf.String()),
 	}
 }

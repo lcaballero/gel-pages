@@ -6,14 +6,12 @@ import (
 
 func NewPostOrganizingPins() *HtmlPage {
 	return &HtmlPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("title", "Organizing Pins").
-				Add("area", "aux").
-				Add("mime", Mime.Html).
-				Add("id", "organizing-pins").
-				Add("stage", "post"),
-		},
+		Labels: NewLabels().
+			Add("title", "Organizing Pins").
+			Add("area", "aux").
+			Add("mime", Mime.Html).
+			Add("id", "organizing-pins").
+			Add("stage", "post"),
 		Content: Div.Class("with-bullets").Add(
 			H2.Text(`Organizing Pins`),
 			P.Text(`Attempting to keep some references to tools, tutorials, blogs, etc that can be used as references.`),

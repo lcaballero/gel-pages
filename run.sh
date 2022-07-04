@@ -18,8 +18,8 @@ dist() {
                      --base "https://www.read-later.net"
 }
 
-list() {
-  gel-pages list
+tests() {
+  (cd "$DIR/pkg/src" && go test ./...)
 }
 
 # local-module is a snippet of code ran to bring a local version of

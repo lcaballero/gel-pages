@@ -56,19 +56,19 @@ func NewWebFileLookup(loc Locator) WebFileLookup {
 
 // Add includes the WebFile using the WebFile ID as the lookup key
 func (p WebFileLookup) Add(page WebFile) {
-	p[page.Meta().ID()] = page
+	p[page.ID()] = page
 }
 
 func (p WebFileLookup) ToDebug() Debug {
 	m := map[string]interface{}{}
 	pages := []map[string]interface{}{}
-	for id, page := range p {
+	for _, page := range p {
 		pages = append(
 			pages,
 			map[string]interface{}{
-				"id":     id,
-				"title":  page.Meta().Title(),
-				"labels": page.Meta().Labels,
+				"id":     page.ID(),
+				"title":  page.Title(),
+				"labels": page.GetLabels(),
 			})
 	}
 	m["pages"] = pages

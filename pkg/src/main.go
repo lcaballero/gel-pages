@@ -19,18 +19,18 @@ func HandleList(ctx *cli.Context) error {
 	vals := []map[string]interface{}{}
 	for _, page := range pages {
 		file := path.Join(
-			opts.Root(), opts.Posts(), page.Meta().ID(),
+			opts.Root(), opts.Posts(), page.ID(),
 			"index.html")
-		if page.Meta().IsRooted() {
-			file = path.Join(opts.Root(), page.Meta().Location())
+		if page.IsRooted() {
+			file = path.Join(opts.Root(), page.Location())
 		}
 		vals = append(vals,
 			map[string]interface{}{
-				"id":     page.Meta().ID(),
-				"title":  page.Meta().Title(),
+				"id":     page.ID(),
+				"title":  page.Title(),
 				"path":   file,
-				"home":   page.Meta().IsHome(),
-				"rooted": page.Meta().IsRooted(),
+				"home":   page.IsHome(),
+				"rooted": page.IsRooted(),
 			})
 	}
 	bin, err := json.MarshalIndent(vals, "", "  ")
@@ -62,8 +62,8 @@ func HandleWrite(ctx *cli.Context) error {
 		return fmt.Errorf("output directory flag: '--root' is required")
 	}
 	for _, page := range pages {
-		dir := path.Join(opts.Root(), opts.Posts(), page.Meta().ID())
-		if page.Meta().IsPost() {
+		dir := path.Join(opts.Root(), opts.Posts(), page.ID())
+		if page.IsPost() {
 			err := os.MkdirAll(dir, 0755)
 			if err != nil {
 				return err
@@ -74,8 +74,8 @@ func HandleWrite(ctx *cli.Context) error {
 				return err
 			}
 		}
-		if page.Meta().IsRooted() {
-			index := path.Join(opts.Root(), page.Meta().Location())
+		if page.IsRooted() {
+			index := path.Join(opts.Root(), page.Location())
 			err := ioutil.WriteFile(index, []byte(page.Bytes()), 0644)
 			if err != nil {
 				return err

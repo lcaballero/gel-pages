@@ -6,15 +6,13 @@ import (
 
 func NewPostBeforeIGetStarted() *HtmlPage {
 	return &HtmlPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("title", "Before I Get Started").
-				Add("area", "header").
-				Add("mime", Mime.Html).
-				Add("id", "before-i-get-started").
-				Add("location", "/index.html").
-				Add("stage", "post"),
-		},
+		Labels: NewLabels().
+			Add("title", "Before I Get Started").
+			Add("area", "header").
+			Add("mime", Mime.Html).
+			Add("id", "before-i-get-started").
+			Add("location", "/index.html").
+			Add("stage", "post"),
 		Content: Div(
 			H2.Text("Before I Get Started"),
 			H3(

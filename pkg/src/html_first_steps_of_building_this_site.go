@@ -6,14 +6,12 @@ import (
 
 func NewPostFirstStepsOfBuildingThisSite() *HtmlPage {
 	return &HtmlPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("title", "First Steps I Did When Building This Site").
-				Add("area", "draft").
-				Add("mime", Mime.Html).
-				Add("id", "first-steps-of-building-this-site").
-				Add("stage", "post"),
-		},
+		Labels: NewLabels().
+			Add("title", "First Steps I Did When Building This Site").
+			Add("area", "draft").
+			Add("mime", Mime.Html).
+			Add("id", "first-steps-of-building-this-site").
+			Add("stage", "post"),
 		Content: Div(
 			H2.Text(`The Steps I Did When Building This Site`),
 			P.Text(`This is a short series where I write up how to setup a basic static site. Not quite sure how many parts will go into this series. This article is the first, and it is very basic.`),

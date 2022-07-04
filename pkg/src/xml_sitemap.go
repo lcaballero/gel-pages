@@ -18,10 +18,10 @@ var (
 func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	urls := []string{}
 	for _, page := range pages {
-		if page.Meta().IsRooted() && !page.Meta().IsHome() {
+		if page.IsRooted() && !page.IsHome() {
 			continue
 		}
-		filepath := path.Join(loc.Posts(), page.Meta().ID())
+		filepath := path.Join(loc.Posts(), page.ID())
 		file := fmt.Sprintf("%s/%s/", loc.Base(), filepath)
 		urls = append(urls, file)
 	}
@@ -37,13 +37,11 @@ func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 	xml = strings.ReplaceAll(xml, "><url", ">\n<url")
 	xml = strings.ReplaceAll(xml, "url></urlset", "url>\n</urlset")
 	return &TextPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("area", "sitemap").
-				Add("mime", Mime.Xml).
-				Add("id", "sitemap.xml").
-				Add("location", "/sitemap.xml"),
-		},
+		Labels: NewLabels().
+			Add("area", "sitemap").
+			Add("mime", Mime.Xml).
+			Add("id", "sitemap.xml").
+			Add("location", "/sitemap.xml"),
 		Content: Frag(
 			Text(`<?xml version="1.0" encoding="UTF-8"?>`),
 			Text("\n"),

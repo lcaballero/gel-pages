@@ -6,14 +6,12 @@ import (
 
 func NewPostSiteDesignTools() *HtmlPage {
 	return &HtmlPage{
-		PageMeta: PageMeta{
-			Labels: NewLabels().
-				Add("title", "Site Design Tools").
-				Add("area", "aux").
-				Add("mime", Mime.Html).
-				Add("id", "site-design-tools").
-				Add("stage", "post"),
-		},
+		Labels: NewLabels().
+			Add("title", "Site Design Tools").
+			Add("area", "aux").
+			Add("mime", Mime.Html).
+			Add("id", "site-design-tools").
+			Add("stage", "post"),
 		Content: Div(
 			H2.Text(`Site Design Tools`),
 			P.Text(`I wanted to name this some thing like an awesome-list, but the category is too broad. So, consider this just a list of some tools I use to maintain this site.`),

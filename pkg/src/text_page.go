@@ -7,15 +7,11 @@ import (
 )
 
 type TextPage struct {
-	PageMeta PageMeta
-	Content  View
+	*Labels
+	Content View
 }
 
 func (p *TextPage) SetDebug(v Viewable) {}
-
-func (p *TextPage) Meta() PageMeta {
-	return p.PageMeta
-}
 
 func (p *TextPage) ToNode() *Node {
 	return Frag(p.Content).ToNode()

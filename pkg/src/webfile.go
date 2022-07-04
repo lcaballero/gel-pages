@@ -6,23 +6,28 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
+type IWeb interface {
+	ID() string
+	Location() string
+	Title() string
+	IsRooted() bool
+	IsHome() bool
+	IsPost() bool
+	GetLabels() Labels
+}
+
 // WebFile represents the HTML, Text, or XML that can be written to
 // disk and is capable of rendering additional debug information as
 // well
 type WebFile interface {
 	View
-	Meta() PageMeta
+	IWeb
 	SetDebug(v Viewable)
 	Bytes() []byte
 }
 
-type PageMeta struct {
-	Labels
-	Version int
-}
-
 type HtmlPage struct {
-	PageMeta     PageMeta
+	*Labels
 	Scripts      Viewable
 	Styles       Viewable
 	Description  View
@@ -39,10 +44,6 @@ func (p *HtmlPage) SetDebug(v Viewable) {
 	p.Debug = v
 }
 
-func (p *HtmlPage) Meta() PageMeta {
-	return p.PageMeta
-}
-
 func (p *HtmlPage) ToNode() *Node {
 	return Frag(
 		HTML5(),
@@ -56,8 +57,8 @@ func (p *HtmlPage) ToNode() *Node {
 				Def(p.Styles, BaseCSS),
 				Def(p.Scripts, BaseJS),
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
-				Meta.Atts("name", "title", "content", p.Meta().Title()),
-				Title(Def(p.Meta().Title(), p.Meta().Title())),
+				Meta.Atts("name", "title", "content", p.Title()),
+				Title(Def(p.Title(), p.Title())),
 			),
 			Body(
 				Div.Class("main").Add(

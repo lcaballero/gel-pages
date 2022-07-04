@@ -9,13 +9,13 @@ import (
 func Test_Labels_IsRooted(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   Labels
+		labels   *Labels
 		expected bool
 		isHome   bool
 	}{
 		{
-			msg:      "empty not one of the rooted locations",
-			expected: false,
+			msg:    "empty not one of the rooted locations",
+			labels: NewLabels(),
 		},
 		{
 			msg:      "home page is rooted file",
@@ -29,13 +29,15 @@ func Test_Labels_IsRooted(t *testing.T) {
 			expected: true,
 		},
 		{
-			msg:      "not in the set of rooted files",
-			labels:   NewLabels().Add("location", "/some-home.html"),
-			expected: false,
+			msg:    "not in the set of rooted files",
+			labels: NewLabels().Add("location", "/some-home.html"),
 		},
 	}
 	for _, c := range cases {
 		t.Run(c.msg, func(t *testing.T) {
+			t.Logf("labels: %+v, location: %s\n",
+				c.labels,
+				c.labels.Location())
 			assert.Equal(t, c.labels.IsRooted(), c.expected)
 			assert.Equal(t, c.labels.IsHome(), c.isHome)
 		})
@@ -45,12 +47,13 @@ func Test_Labels_IsRooted(t *testing.T) {
 func Test_Labels_IsPost(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   Labels
+		labels   *Labels
 		expected bool
 	}{
 		{
 			msg:      "no stage, not a post",
 			expected: false,
+			labels:   NewLabels(),
 		},
 		{
 			msg:      "stage not 'post', not a post",
@@ -73,12 +76,13 @@ func Test_Labels_IsPost(t *testing.T) {
 func Test_Labels_Location(t *testing.T) {
 	cases := []struct {
 		msg      string
-		labels   Labels
+		labels   *Labels
 		expected string
 	}{
 		{
 			msg:      "Empty labels, no location",
 			expected: "",
+			labels:   NewLabels(),
 		},
 		{
 			msg:      "location only whitespace",
