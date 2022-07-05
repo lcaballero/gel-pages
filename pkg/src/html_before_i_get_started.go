@@ -89,7 +89,7 @@ without that kind of content.`),
 			P.Text(`Learning some google analytics is also on the list. I'm not sure how
 deep that rabbit hole goes, but I'm guessing there is quite a bit to
 learn about GA.`),
-			P.Text(`That's about it I guess.`),
+			P.Text(`That's about it I guess.  And probably a bit too ambitious.`),
 			P.Text(`L-`),
 		),
 	}

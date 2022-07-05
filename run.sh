@@ -13,7 +13,7 @@ build() {
 
 dist() {
   build && gel-pages write \
-                     --root .dist \
+                     --root "$DIR/.dist" \
                      --posts posts \
                      --base "https://www.read-later.net"
 }
@@ -22,10 +22,18 @@ tests() {
   (cd "$DIR/pkg/src" && go test ./...)
 }
 
+clean() {
+  rm -rf "$DIR/.dist"
+}
+
 # local-module is a snippet of code ran to bring a local version of
 # the gel module
 local-module() {
   go mod edit --replace=github.com/lcaballero/gel-pages=../gel
+}
+
+lint() {
+  (cd "$DIR/pkg/src" && golangci-lint run -v)
 }
 
 gen::files() {

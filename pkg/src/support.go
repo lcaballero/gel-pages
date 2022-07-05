@@ -45,13 +45,6 @@ func DefaultMeta() View {
 	)
 }
 
-func DefaultTitle(title, def string) View {
-	if title == "" {
-		return Title.Text(def)
-	}
-	return Title.Text(title)
-}
-
 func DefaultAuthor(author string) string {
 	if strings.TrimSpace(author) == "" {
 		return "Lucas Caballero"

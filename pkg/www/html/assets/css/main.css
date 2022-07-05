@@ -43,6 +43,12 @@ footer .container.shadow {
     border-bottom: #333 1px solid;
     padding-bottom: 2px;
 }
+.side-bar h1 a {
+    color: #111;
+    text-decoration: none;
+    font-family: Times;
+    font-weight: lighter;
+}
 .side-bar ul {
     margin-top: 6px;
 }

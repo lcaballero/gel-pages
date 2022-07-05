@@ -1,16 +1,5 @@
 package main
 
-import (
-	"log"
-
-	"github.com/lcaballero/gel"
-)
-
-func PostNotImplementedYet(page string) gel.View {
-	log.Fatalf("page not implemented yet: '%s'", page)
-	return nil
-}
-
 // Locator provides the directory information used to write WebFiles
 // to disk
 type Locator interface {

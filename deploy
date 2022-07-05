@@ -3,13 +3,15 @@ set -e
 
 HOST="www.read-later.net"
 WWW_DIR="/var/www/$HOST"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 pack-up() {
-    tar -cf dist.tar.gz -C .dist .
+    tar -cf "$DIR/dist.tar.gz" -C "$DIR/.dist" .
 }
 
 push-out() {
-    scp dist.tar.gz ./deploy root@ssh.read-later.net:
+    scp "$DIR/dist.tar.gz" \
+        "$DIR/deploy" root@ssh.read-later.net:
 }
 
 publish() {

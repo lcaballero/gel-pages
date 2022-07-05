@@ -11,39 +11,38 @@ Can be an advice for 'compilation-start'."
 
 (advice-add 'compilation-start :after #'compilation-post-dir)
 
+(defun tools-root-dir ()
+  (locate-dominating-file buffer-file-name ".dir-locals.el"))
+
 (defun tools-load ()
   (interactive)
-  (let ((tools-directory (locate-dominating-file buffer-file-name ".dir-locals.el")))
-    (load (format "%s.tools.el" tools-directory))))
+  (load (format "%s%s" (tools-root-dir) ".tools.el")))
 
 (defun region-to-inserted (first second)
-  (narrow-to-region beg end)
-  (set-mark nil)
-  (goto-char (point-min))
-  (insert first)
-  (goto-char (point-max))
-  (insert second)
-  (widen))
+  (save-excursion
+    (narrow-to-region beg end)
+    (set-mark nil)
+    (goto-char (point-min))
+    (insert first)
+    (goto-char (point-max))
+    (insert second)
+    (widen)))
 
 (defun region-to-p-tag (beg end)
   (interactive "r")
-  (save-excursion
-    (region-to-inserted "P.Text(`" "`),")))
+  (region-to-inserted "P.Text(`" "`),"))
 
 (defun region-to-xlink-tag (beg end)
   (interactive "r")
-  (save-excursion
-    (region-to-inserted "XLink(\"" "\"),")))
+  (region-to-inserted "XLink(\"" "\"),"))
 
 (defun region-to-code-tag (beg end)
   (interactive "r")
-  (save-excursion
-    (region-to-inserted "Code.Text(\"" "\"),")))
+  (region-to-inserted "Code.Text(\"" "\"),"))
 
 (defun region-to-insert-in-text (beg end)
   (interactive "r")
-  (save-excursion
-    (region-to-inserted "`),\n" "Text(`")))
+  (region-to-inserted "`),\n" "Text(`"))
 
 (defun open-setup-org ()
   (interactive)
@@ -76,70 +75,95 @@ Can be an advice for 'compilation-start'."
 ;;                "^ *" ""
 ;;                "^" "Add(")
 
-(defun tools-deploy-shell-command (cmd arg)
-  (let* ((tools-directory (locate-dominating-file buffer-file-name ".dir-locals.el"))
-         (tools-command (format "%s%s %s" tools-directory cmd arg)))
-    (message "site: www.read-later.net, directory: %s, command: %s"
-             tools-directory
-             tools-command)
-    (shell-command tools-command)))
+(defun tools-shell-command (file cmd)
+  (format "%s%s %s" (tools-root-dir) file cmd))
 
-(defun tools-dist-read-later-net ()
-  (interactive)
-  (tools-deploy-shell-command "run.sh" "dist"))
+;;(tools-shell-command "run.sh" "www")
 
-(defun tools-build-read-later-net ()
-  (interactive)
-  (tools-deploy-shell-command "run.sh" "build"))
+(defun tools-run-command (cmd arg)
+  (shell-command (tools-shell-command cmd arg)))
 
-(defun tools-tests-read-later-net ()
+(defun tools-deploy-www-read-later-net ()
   (interactive)
-  (tools-deploy-shell-command "run.sh" "tests"))
+  (tools-run-command "deploy" "www"))
 
-(defun tools-deploy-read-later-net ()
+(defun tools-deploy-clean-read-later-net ()
   (interactive)
-  (tools-deploy-shell-command "deploy" "www"))
+  (tools-run-command "deploy" "clean"))
 
-(defun tools-clean-read-later-net ()
+(defun tools-run-dist-read-later-net ()
   (interactive)
-  (tools-deploy-shell-command "deploy" "clean"))
+  (tools-run-command "run.sh" "dist"))
+
+(defun tools-run-build-read-later-net ()
+  (interactive)
+  (tools-run-command "run.sh" "build"))
+
+(defun tools-run-clean-read-later-net ()
+  (interactive)
+  (tools-run-command "run.sh" "clean"))
+
+(defun tools-run-tests-read-later-net ()
+  (interactive)
+  (tools-run-command "run.sh" "tests"))
+
+(defun tools-run-tests-read-later-net ()
+  "Uses the `command` function to run compilation but
+additionally using the testing-command that should be provided
+via .dir-locals "
+  (interactive)
+  (compile (format "%s%s %s" (tools-local-file) "run.sh" "tests")))
+
+(defun tools-run-lint-read-later-net ()
+  (interactive)
+  (tools-run-command "run.sh" "lint"))
 
 (defhydra local-tools-hydra (:color pink :hint nil :exit t)
   "
-^Go Element (gel)^            ^Boilerplates^         ^Tools^
----------------------------------------------------------------------------------------------------------
-_i_: make Text() of region    _B_: bash file         _r_: reload local .tools.el
-_p_: make P() tag of region   _D_: bash $DIR         _o_: open setup.org
-_m_: make XLink() of region   _H_: go http handler   _l_: run key/val to Add()
-_o_: make Code() of region    _T_: go test file      ^ ^
+^Go Element (gel)^            ^Boilerplates^         ^Tools^                       ^Notes^
+----------------------------------------------------------------------------------------------------------------
+_i_: make Text() of region    _B_: bash file         _R_: reload local .tools.el   _r_: reload the notes file
+_p_: make P() tag of region   _D_: bash $DIR         _o_: open setup.org           _g_: link to line in file
+_m_: make XLink() of region   _H_: go http handler   _a_: run key/val to Add()
+_e_: make Code() of region    _T_: go test file      ^ ^
 ^ ^                           ^ ^                    _w_: ./deploy www
-^ ^                           ^ ^                    _c_: ./deploy clean
+^ ^                           ^ ^                    _C_: ./deploy clean
+^ ^                           ^ ^                    ^ ^
 ^ ^                           ^ ^                    _d_: ./run.sh dist
 ^ ^                           ^ ^                    _b_: ./run.sh build
+^ ^                           ^ ^                    _c_: ./run.sh clean
 ^ ^                           ^ ^                    _t_: ./run.sh tests
+^ ^                           ^ ^                    _l_: ./run.sh lint
 
 "
   ;; Go Element (gel)
   ("i" region-to-insert-in-text nil)
   ("p" region-to-p-tag nil)
   ("m" region-to-xlink-tag nil)
-  ("o" region-to-code-tag nil)
+  ("e" region-to-code-tag nil)
   ;; Boilerplates
   ("B" tmpl-new-bash nil)
   ("D" tmpl-script-dir nil)
   ("H" tmpl-go-http-handler-func nil)
   ("T" tmpl-go-new-test-file nil)
   ;; Tools
-  ("r" tools-load nil)
+  ("R" tools-load nil)
   ("o" open-setup-org nil)
-  ("l" tools-edit-line nil)
+  ("a" tools-edit-line nil)
   ;; --------------------------------------------
-  ("w" tools-deploy-read-later-net nil)
-  ("c" tools-clean-read-later-net nil)
-  ("d" tools-dist-read-later-net nil)
-  ("b" tools-build-read-later-net nil)
-  ("t" tools-tests-read-later-net nil)
-  
+  ("w" tools-deploy-www-read-later-net nil)
+  ("C" tools-deploy-clean-read-later-net nil)
+  ;; --------------------------------------------
+  ("d" tools-run-dist-read-later-net nil)
+  ("b" tools-run-build-read-later-net nil)
+  ("c" tools-run-clean-read-later-net nil)
+  ("t" tools-run-tests-read-later-net nil)
+  ("l" tools-run-lint-read-later-net nil)
+
+  ;; Notes
+  ("r" notes-reload nil)
+  ("g" notes-to-temp-file nil)
+
   ("q" nil "quit"))
 
 (global-set-key (kbd "C-c C-v") 'local-tools-hydra/body)
