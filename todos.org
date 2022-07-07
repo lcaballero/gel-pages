@@ -1,0 +1,5 @@
+* TODO Use the system-type emacs elisp var instead of the shell
+  - The values can be found in help for the system-type varaible
+* TODO Consider making assets finger-printed to make updates easier
+  - Although right now no need for optimization since there are zero
+    users/readers

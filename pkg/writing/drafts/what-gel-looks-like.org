@@ -1,0 +1,13 @@
+* Generating HTML with Go (not using templates)
+  I wrote a library not too long ago that I called =gel= that generates
+  HTML from within Go code.  The library doesn't use templates.  I
+  wrote it years ago and kind of forgot about it.
+
+  But recently, I've started getting a bit annoyed with Go Templates.
+  So I looked to using it on the latest rendition of this site.  I'll
+  call it the July 2022 rendition, just to mark the date.  This is the
+  3rd or 4th time I've written this site.  And for the record there
+  was a Pug version, an org-mode with emacs batch conversion version,
+  and I think a react version at some point as well.  This is the Gel
+  version.
+  

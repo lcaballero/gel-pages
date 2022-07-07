@@ -44,4 +44,48 @@ gen::clean() {
   gen::files | xargs rm
 }
 
+img::dockerfile() {
+    cat <<EOF
+FROM ubuntu:bionic
+
+RUN apt update
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt install -y imagemagick
+RUN apt-get install -y webp jpegoptim optipng
+
+EOF
+
+}
+
+img::sh() {
+  (cd dl/images && \
+     docker run -it --rm \
+            -v $(pwd):/app \
+            -w /app \
+            mogrify:wip \
+            bash
+   )
+}
+
+img::run() {
+  rm -rf dl/out && mkdir -p dl/out && \
+    docker run -it --rm \
+           -v $(pwd)/dl:/app \
+           -w /app \
+           mogrify:wip \
+           jpegoptim -v \
+           --dest=./out \
+           --strip-all \
+           --size=30% \
+           --max=100 \
+           images/julien-riedel-kHklwdauyHI-unsplash.jpg
+
+  cp dl/out/julien-riedel-kHklwdauyHI-unsplash.jpg pkg/www/html/assets/img/
+}
+
+img() {
+  (cd bin && \
+     img::dockerfile | docker build -t mogrify:wip . -f -)
+}
+
 "$@"

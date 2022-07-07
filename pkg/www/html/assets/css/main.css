@@ -19,9 +19,9 @@ footer .container.shadow {
 
 /*========== side-bar ==========*/
 .side-bar {
-    left: 0px;
-    top: 0px;
-    width: 60%;
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
 }
 .side-bar.container > header {
     padding: 0px;
@@ -33,13 +33,12 @@ footer .container.shadow {
     padding-bottom: 30px;
 }
 .side-bar > header {
-    padding: 20px;
+    padding: 11px 11px;
     background-color: #fffff4;
+    background-color: rgba(255, 255, 245, 0.80);
 }
 .side-bar h1 {
     font-size: 32px;
-    display: inline-block;
-    width: 100%;
     border-bottom: #333 1px solid;
     padding-bottom: 2px;
 }
@@ -57,6 +56,40 @@ footer .container.shadow {
 }
 .side-bar li+li {
     padding-left: 8px;
+}
+
+/*========== banner ==========*/
+.main .banner {
+    width: 760px;
+    padding: 0;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+.banner {
+    padding-top: 20px;
+}
+.banner .win {
+    position: relative;
+}
+.banner .inner { 
+    box-shadow: 0 0 40px rgb(71 51 31 / 50%);
+} 
+.banner .img {
+    height: 360px;
+    overflow: hidden;
+
+    background-image: url(/img/julien-riedel-kHklwdauyHI-unsplash.jpg);
+    background-size: cover;
+
+    border-bottom: 1px solid #bbb;
+    border-radius: 4px;
+
+    background-position: 0 -40px;
+}
+.banner img {
+    width: 100%;
+    height: auto;
+    margin-top: -120px;
 }
 
 /*========== prose ==========*/
