@@ -118,3 +118,19 @@
 
 * Some Improvements to =gel=
   I've found a few things to change in a v2 of the library.
+
+  #+begin_src elisp
+  ||https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/||Kubernetes Labels and Selectors
+    (link
+     (:type https
+            :path //kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+            :format bracket
+            :raw-link https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+            :application nil
+            :search-option nil
+            :begin 4104
+            :end 4214
+            :contents-begin 4181
+            :contents-end 4212
+            :post-blank 0))  
+  #+end_src
