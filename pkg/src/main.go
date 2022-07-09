@@ -86,6 +86,10 @@ func HandleWrite(ctx *cli.Context) error {
 }
 
 func main() {
+	Bookmarks()
+}
+
+func main1() {
 	procs := Procs{
 		DoList:  HandleList,
 		DoGen:   HandleGen,

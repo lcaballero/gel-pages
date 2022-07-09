@@ -3,6 +3,7 @@ set -e
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
+
 # build create
 build() {
   rm -rf "$DIR/.dist" \
@@ -86,6 +87,11 @@ img::run() {
 img() {
   (cd bin && \
      img::dockerfile | docker build -t mogrify:wip . -f -)
+}
+
+cp::bm() {
+  cp '/Users/lucascaballero/Library/Application Support/Google/Chrome/Default/Bookmarks' \
+     bookmarks.json
 }
 
 "$@"

@@ -233,7 +233,7 @@ _a_: run key/val to Add()
             (contents-end (plist-get (cadr (org-element-link-parser)) :contents-end))
             (raw-link (plist-get (cadr (org-element-link-parser)) :raw-link))
             )
-        (setq d (+ d 1))        
+        (setq d (+ d 1))
         ;;(message "point: %S, begin: %S, end: %S, depth: %d, props: %S" (point) begin end d props)
         (if (or begin (= d 33))
             (progn
@@ -245,7 +245,7 @@ _a_: run key/val to Add()
                 (insert (format "A.Atts(\"href\",\"%s\").Text(\"%s\")" raw-link contents))
                 ;;(message "contents: %s" contents)
                 ))
-          
+
           (progn
             (backward-word)
             (backward-word)
@@ -255,4 +255,17 @@ _a_: run key/val to Add()
 ;;org-element-link-parser 4103
 
 
+(defhydra bookmarks-run-tools (:cool pink :hint nil :exit t)
+  "
+^Build Tools^
+----------------------------------------------------------------------------------------------------------------
+_b_: ./run.sh build
+
+"
+  ("b" (lambda () (interactive) (tools-run-command "bookmarks.sh" "build")) nil)
+  ("q" nil "quit" :exit t))
+
 (global-set-key (kbd "C-c a") 'org-gel/parse-org-link)
+(global-set-key (kbd "C-c .") 'bookmarks-run-tools/body)
+
+(load "~/emacs-code/emacs-go-tag/go-tag.el")
