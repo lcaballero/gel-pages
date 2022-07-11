@@ -9,6 +9,6 @@
                    (setq compile-command
                          (format "%s%s" default-directory "run.sh build"))
 
-                   (load (format "%shydras.el" default-directory))
+                   (load (format "%s.tools.el/load-tools.el" default-directory))
 
                    )))))
