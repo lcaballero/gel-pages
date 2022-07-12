@@ -4,7 +4,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostCLISnippets() *HtmlPage {
+func NewPostCLISnippets(env Environment) *HtmlPage {
 	return &HtmlPage{
 		Labels: NewLabels().
 			Add("title", "CLI Snippet").
@@ -12,6 +12,7 @@ func NewPostCLISnippets() *HtmlPage {
 			Add("mime", Mime.Html).
 			Add("id", "cli-snippets").
 			Add("stage", "post"),
+		Env: env,
 		Content: Div(
 			H2.Text("Snippets"),
 			Text(`

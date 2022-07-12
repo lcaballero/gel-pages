@@ -18,17 +18,31 @@ type Locator interface {
 // WebFileLookup maps the IDs of the WebFile to the WebFile itself
 type WebFileLookup map[string]WebFile
 
+type Environment interface {
+	IsProd() bool
+	IsDev() bool
+}
+
+type DeploymentEnv string
+
+func (e DeploymentEnv) IsProd() bool {
+	return string(e) == "prod"
+}
+func (e DeploymentEnv) IsDev() bool {
+	return !e.IsProd()
+}
+
 // NewWebFileLookup creates a lookup using the Locator to make
 // sitemap(s)
-func NewWebFileLookup(loc Locator) WebFileLookup {
+func NewWebFileLookup(loc Locator, env Environment) WebFileLookup {
 	pages := WebFileLookup{}
-	pages.Add(NewPostBeforeIGetStarted())
-	pages.Add(NewPostSideProjects())
-	pages.Add(NewPostPossibleSiteOrg())
-	pages.Add(NewPostCLISnippets())
-	pages.Add(NewPostSiteDesignTools())
-	pages.Add(NewPostOrganizingPins())
-	pages.Add(NewPostFirstStepsOfBuildingThisSite())
+	pages.Add(NewPostBeforeIGetStarted(env))
+	pages.Add(NewPostSideProjects(env))
+	pages.Add(NewPostPossibleSiteOrg(env))
+	pages.Add(NewPostCLISnippets(env))
+	pages.Add(NewPostSiteDesignTools(env))
+	pages.Add(NewPostOrganizingPins(env))
+	pages.Add(NewPostFirstStepsOfBuildingThisSite(env))
 
 	// These require page names and path information
 	site0 := NewTextSitemap(loc, pages)

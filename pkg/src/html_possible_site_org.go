@@ -4,7 +4,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostPossibleSiteOrg() *HtmlPage {
+func NewPostPossibleSiteOrg(env Environment) *HtmlPage {
 	return &HtmlPage{
 		Labels: NewLabels().
 			Add("title", "Possible Site Org").
@@ -12,6 +12,7 @@ func NewPostPossibleSiteOrg() *HtmlPage {
 			Add("mime", Mime.Html).
 			Add("id", "possible-site-org").
 			Add("stage", "post"),
+		Env: env,
 		Content: Div(
 			H2.Text("Possible Site Organization [DRAFT]"),
 			P(

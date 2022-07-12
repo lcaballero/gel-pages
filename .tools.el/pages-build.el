@@ -50,7 +50,7 @@ via .dir-locals "
 ----------------------------------------------------------------------------------------------------------------
 _d_: ./run.sh dist          _W_: ./deploy www
 _b_: ./run.sh build         _C_: ./deploy clean
-_c_: ./run.sh clean
+_c_: ./run.sh clean         _P_: ./deploy prod
 _t_: ./run.sh tests
 _l_: ./run.sh lint
 
@@ -65,5 +65,6 @@ _l_: ./run.sh lint
   ;; local tooling for ./deploy functions
   ("W" pages-build/deploy nil)
   ("C" pages-build/deploy-clean nil)
+  ("P" pages-build/deploy nil)
 
   ("q" nil "quit" :exit t))

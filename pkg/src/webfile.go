@@ -38,6 +38,7 @@ type HtmlPage struct {
 	UseIndention bool
 	UseAnalytics bool
 	Debug        Viewable
+	Env          Environment
 }
 
 func (p *HtmlPage) SetDebug(v Viewable) {
@@ -59,6 +60,7 @@ func (p *HtmlPage) ToNode() *Node {
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
 				Meta.Atts("name", "title", "content", p.Title()),
 				Title(Def(p.Title(), p.Title())),
+				NewGoogleAnalyticsScriptTags(p.Env),
 			),
 			Body(
 				Div.Class("main").Add(

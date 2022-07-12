@@ -15,6 +15,9 @@ sub-commands:
       - name: base
         type: string
         usage: "protocol and host of resource addresses"
+      - name: env
+        type: string
+        usage: "set the environment name"
   - name: gen
     usage: "generate html and write it to stdout"
     flags:
@@ -36,6 +39,9 @@ sub-commands:
       - name: posts
         type: string
         usage: "directory where posts are to be written"
+      - name: env
+        type: string
+        usage: "set the environment name"
   - name: write
     usage: "generate html and write to file based on parameters"
     flags:
@@ -54,3 +60,6 @@ sub-commands:
       - name: debug
         type: bool
         usage: "add debug html output to rendered page(s)"
+      - name: env
+        type: string
+        usage: "set the environment name"

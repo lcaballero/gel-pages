@@ -1,8 +1,31 @@
 package main
 
 import (
+	"log"
+
 	. "github.com/lcaballero/gel"
 )
+
+func NewGoogleAnalyticsScriptTags(env Environment) View {
+	if env.IsDev() {
+		log.Println("writing dev")
+		return None()
+	}
+	log.Println("writing prod")
+	return Text(`
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YFZDVRTS83"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+
+       gtag('config', 'G-YFZDVRTS83');
+   </script>
+   <script>console.log("ga added");</script>
+`)
+
+}
 
 func NewPostGoogleAnalytics() *TextPage {
 	return &TextPage{

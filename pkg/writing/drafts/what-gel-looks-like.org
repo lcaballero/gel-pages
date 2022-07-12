@@ -90,7 +90,7 @@
 
   So, to generate the static site I compile and execute the resulting
   binary.  I provide some flag parameters to tell it where to write
-  files, the domain for sitemap creation, and specify a directory 
+  files, the domain for sitemap creation, and specify a directory
   where to write published posts, etc.  Pretty simple, really.
 
 ** A Quick Tangent to Talk about Labels
@@ -132,5 +132,5 @@
             :end 4214
             :contents-begin 4181
             :contents-end 4212
-            :post-blank 0))  
+            :post-blank 0))
   #+end_src

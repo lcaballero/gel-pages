@@ -4,7 +4,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostBeforeIGetStarted() *HtmlPage {
+func NewPostBeforeIGetStarted(env Environment) *HtmlPage {
 	return &HtmlPage{
 		Labels: NewLabels().
 			Add("title", "Before I Get Started").
@@ -13,6 +13,7 @@ func NewPostBeforeIGetStarted() *HtmlPage {
 			Add("id", "before-i-get-started").
 			Add("location", "/index.html").
 			Add("stage", "post"),
+		Env: env,
 		Content: Div(
 			H2.Text("Before I Get Started"),
 			H3(

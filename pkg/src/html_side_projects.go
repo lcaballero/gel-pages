@@ -4,7 +4,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostSideProjects() *HtmlPage {
+func NewPostSideProjects(env Environment) *HtmlPage {
 	return &HtmlPage{
 		Labels: NewLabels().
 			Add("title", "Side Projects").
@@ -12,6 +12,7 @@ func NewPostSideProjects() *HtmlPage {
 			Add("mime", Mime.Html).
 			Add("id", "side-projects").
 			Add("stage", "post"),
+		Env: env,
 		Content: Div(
 			H3.Text("Side Projects"),
 			P.Text(`I plan to write about my side-projects here. Calling these ideas 'side-projects', might be too generous. Most of these projects won't be very ambitious. They probably won't involve the latest and greatest framework, but then again they might, because I'm overly curious about things that sound interesting.`),

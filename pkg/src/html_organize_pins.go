@@ -4,7 +4,7 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-func NewPostOrganizingPins() *HtmlPage {
+func NewPostOrganizingPins(env Environment) *HtmlPage {
 	return &HtmlPage{
 		Labels: NewLabels().
 			Add("title", "Organizing Pins").
@@ -12,6 +12,7 @@ func NewPostOrganizingPins() *HtmlPage {
 			Add("mime", Mime.Html).
 			Add("id", "organizing-pins").
 			Add("stage", "post"),
+		Env: env,
 		Content: Div.Class("with-bullets").Add(
 			H2.Text(`Organizing Pins`),
 			P.Text(`Attempting to keep some references to tools, tutorials, blogs, etc that can be used as references.`),
