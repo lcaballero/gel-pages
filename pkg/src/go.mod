@@ -2,10 +2,8 @@ module github.com/lcaballero/gel-pages
 
 go 1.18
 
-replace github.com/lcaballero/gel-pages => ../gel
-
 require (
-	github.com/lcaballero/gel v0.0.0-20220115050739-8bfed9318c88
+	github.com/lcaballero/gel v0.0.0-20220712214338-21bb02ab958c
 	github.com/stretchr/testify v1.8.0
 	github.com/urfave/cli/v2 v2.10.3
 )
@@ -18,3 +16,5 @@ require (
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/lcaballero/gel => ../../../gel

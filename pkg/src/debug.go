@@ -10,13 +10,13 @@ type Debug struct {
 	Out interface{}
 }
 
-func (d Debug) ToView() View {
+func (d Debug) ToNode() *Node {
 	if d.Out == nil {
-		return None()
+		return None().ToNode()
 	}
 	bin, err := json.MarshalIndent(d.Out, "", "  ")
 	if err != nil {
-		return None()
+		return None().ToNode()
 	}
 	return Div.Class("container debug code").Add(
 		Code(
@@ -24,5 +24,5 @@ func (d Debug) ToView() View {
 				string(bin),
 			),
 		),
-	)
+	).ToNode()
 }

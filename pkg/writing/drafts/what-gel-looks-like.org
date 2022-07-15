@@ -118,6 +118,8 @@
 
 * Some Improvements to =gel=
   I've found a few things to change in a v2 of the library.  Which is
-  to say that the abstractions may not be intuitive enough.  Mainly the sequence of `.ToNode().WriteTo(..)`
+  to say that the abstractions may not be intuitive enough.  Mainly
+  the sequence of `.ToNode().WriteTo(..)`.
+
 
   

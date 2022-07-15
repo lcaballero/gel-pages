@@ -4,11 +4,10 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-type AuxFooter struct {
-}
+type AuxFooter struct{}
 
-func (f AuxFooter) ToView() View {
-	return Frag(
+func (a AuxFooter) ToNode() *Node {
+	return Fragment{
 		Footer(
 			Div.Class("container shadow bg-1").Add(
 				Div.Class("aux").Add(
@@ -35,5 +34,5 @@ func (f AuxFooter) ToView() View {
 				),
 			),
 		),
-	)
+	}.ToNode()
 }

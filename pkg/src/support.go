@@ -24,14 +24,14 @@ var BaseJS = Scripts{
 
 type Scripts []string
 
-func (s Scripts) ToView() View {
-	return JS(s...)
+func (s Scripts) ToNode() *Node {
+	return JS(s...).ToNode()
 }
 
 type Styles []string
 
-func (s Styles) ToView() View {
-	return CSS(s...)
+func (s Styles) ToNode() *Node {
+	return CSS(s...).ToNode()
 }
 
 func HTML5() View {
@@ -39,10 +39,10 @@ func HTML5() View {
 }
 
 func DefaultMeta() View {
-	return Frag(
+	return Fragment{
 		Meta.Atts("charset", "utf-8"),
 		Meta.Atts("name", "viewport", "content", "width=device-width, initial-scale=1"),
-	)
+	}
 }
 
 func DefaultAuthor(author string) string {
@@ -53,19 +53,19 @@ func DefaultAuthor(author string) string {
 }
 
 func JS(href ...string) View {
-	f := NewFragment()
+	f := Fragment{}
 	for _, h := range href {
 		js := Script.Atts("src", h)
-		f.Add(js)
+		f = f.Add(js)
 	}
 	return f
 }
 
 func CSS(href ...string) View {
-	f := NewFragment()
+	f := Fragment{}
 	for _, h := range href {
 		css := Link.Atts("href", h, "rel", "stylesheet")
-		f.Add(css)
+		f = f.Add(css)
 	}
 	return f
 }

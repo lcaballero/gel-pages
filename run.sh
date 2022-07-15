@@ -16,8 +16,7 @@ dist() {
   build && gel-pages write \
                      --root "$DIR/.dist" \
                      --posts posts \
-                     --base "https://www.read-later.net" \
-                     --env prod
+                     --base "https://www.read-later.net"
 }
 
 tests() {

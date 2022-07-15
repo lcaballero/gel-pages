@@ -22,31 +22,32 @@ type IWeb interface {
 type WebFile interface {
 	View
 	IWeb
-	SetDebug(v Viewable)
+	SetDebug(v View)
 	Bytes() []byte
 }
 
 type HtmlPage struct {
 	Labels
-	Scripts      Viewable
-	Styles       Viewable
+	Scripts      View
+	Styles       View
 	Description  View
-	Sidebar      Viewable
-	AuxFooter    Viewable
+	Sidebar      View
+	AuxFooter    View
 	Content      View
 	Author       string
 	UseIndention bool
 	UseAnalytics bool
-	Debug        Viewable
+	Debug        View
 	Env          Environment
 }
 
-func (p *HtmlPage) SetDebug(v Viewable) {
+func (p *HtmlPage) SetDebug(v View) {
 	p.Debug = v
 }
 
 func (p *HtmlPage) ToNode() *Node {
-	return Frag(
+	BaseCSS.ToNode().Println()
+	return Fragment{
 		HTML5(),
 		Html(
 			Head(
@@ -55,27 +56,29 @@ func (p *HtmlPage) ToNode() *Node {
 				Link.Atts("rel", "icon", "type", "image/png", "sizes", "32x32", "href", "/img/favicon-32x32.png"),
 				Link.Atts("rel", "icon", "type", "image/png", "sizes", "16x16", "href", "/img/favicon-16x16.png"),
 				Link.Atts("rel", "manifest", "href", "/img/site.webmanifest"),
-				Def(p.Styles, BaseCSS),
-				Def(p.Scripts, BaseJS),
+				//Default(p.Styles, BaseCSS),
+				BaseCSS,
+				//Default(p.Scripts, BaseJS),
+				BaseJS,
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
 				Meta.Atts("name", "title", "content", p.Title()),
-				Title(Def(p.Title(), p.Title())),
+				Title(Default(p.Title(), p.Title())),
 				NewGoogleAnalyticsScriptTags(p.Env),
 			),
 			Body(
 				Div.Class("main").Add(
-					Def(p.Sidebar, Sidebar{}),
+					Default(p.Sidebar, Sidebar{}),
 					Div.Class("container shadow bg-1").Add(
 						Div.Class("prose").Add(
 							p.Content,
 						),
 					),
-					Def(p.AuxFooter, AuxFooter{}),
-					Def(p.Debug, Debug{}),
+					Default(p.AuxFooter, AuxFooter{}),
+					Default(p.Debug, Debug{}),
 				),
 			),
 		),
-	).ToNode()
+	}.ToNode()
 }
 
 // String turns the HtmlPage into a single string of HTML
@@ -83,7 +86,7 @@ func (p HtmlPage) String() string {
 	if p.UseIndention {
 		indent := NewIndent()
 		buf := bytes.NewBufferString("")
-		p.ToNode().WriteToIndented(indent, buf)
+		p.ToNode().WriteWithIndention(indent, buf)
 		return buf.String()
 	}
 	return p.ToNode().String()
@@ -94,7 +97,7 @@ func (p HtmlPage) Bytes() []byte {
 	if p.UseIndention {
 		indent := NewIndent()
 		buf := bytes.NewBufferString("")
-		p.ToNode().WriteToIndented(indent, buf)
+		p.ToNode().WriteWithIndention(indent, buf)
 		return buf.Bytes()
 	}
 	buf := bytes.NewBufferString("")

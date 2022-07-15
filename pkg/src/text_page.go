@@ -11,10 +11,10 @@ type TextPage struct {
 	Content View
 }
 
-func (p *TextPage) SetDebug(v Viewable) {}
+func (p *TextPage) SetDebug(v View) {}
 
 func (p *TextPage) ToNode() *Node {
-	return Frag(p.Content).ToNode()
+	return Fragment{p.Content}.ToNode()
 }
 
 func (p *TextPage) String() string {

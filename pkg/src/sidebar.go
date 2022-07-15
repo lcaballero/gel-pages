@@ -4,11 +4,10 @@ import (
 	. "github.com/lcaballero/gel"
 )
 
-type Sidebar struct {
-}
+type Sidebar struct{}
 
-func (s Sidebar) ToView() View {
-	return Frag(
+func (s Sidebar) ToNode() *Node {
+	return Fragment{
 		Div.Class("banner container").Add(
 			Div.Class("inner").Add(
 				Div.Class("win").Add(
@@ -34,5 +33,5 @@ func (s Sidebar) ToView() View {
 				),
 			),
 		),
-	)
+	}.ToNode()
 }

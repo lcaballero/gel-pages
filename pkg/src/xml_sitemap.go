@@ -26,9 +26,9 @@ func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 		urls = append(urls, file)
 	}
 	sort.Strings(urls)
-	f := NewFragment()
+	f := Fragment{}
 	for _, file := range urls {
-		f.Add(Url.Add(Loc.Add(Text(file))))
+		f = f.Add(Url.Add(Loc.Add(Text(file))))
 	}
 	u := Urlset.
 		Atts("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9").
@@ -42,10 +42,10 @@ func NewXmlSitemap(loc Locator, pages WebFileLookup) *TextPage {
 			Add("mime", Mime.Xml).
 			Add("id", "sitemap.xml").
 			Add("location", "/sitemap.xml"),
-		Content: Frag(
+		Content: Fragment{
 			Text(`<?xml version="1.0" encoding="UTF-8"?>`),
 			Text("\n"),
 			Text(xml),
-		),
+		},
 	}
 }
