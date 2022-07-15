@@ -1,24 +1,21 @@
-(defun gel-region-to-para (beg end)
+(defun org-gel/wrap (beg end at-start at-end)
+  (narrow-to-region beg end)
+  (set-mark nil)
+  (goto-char (point-min))
+  (insert at-start)
+  (goto-char (point-max))
+  (insert at-end)
+  (widen))
+
+(defun org-gel/para (beg end)
   (interactive "r")
   (save-excursion
-    (narrow-to-region beg end)
-    (set-mark nil)
-    (goto-char (point-min))
-    (insert "P.Text(`")
-    (goto-char (point-max))
-    (insert "`),")
-    (widen)))
+    (org-gel/wrap beg end "P.Text(`" "`),")))
 
-(defhydra org-gel-tools-hydra (:color pink :hint nil :exit t)
-  "
-^Org Gel^
-----------------------------------------------------------------------------------------------------------------
-_p_: region to gel para
-
-"
-  ("p" gel-region-to-para nil)
-
-  ("q" nil "quit" :exit t))
+(defun org-gel/text (beg end)
+  (interactive "r")
+  (save-excursion
+    (org-gel/wrap beg end "Text(`""`),")))
 
 (defun org-gel/parse-org-link ()
   (interactive)
@@ -52,4 +49,19 @@ _p_: region to gel para
             (forward-word)
             (forward-char 1)))))))
 
-(global-set-key (kbd "C-c a") 'org-gel/parse-org-link)
+(defhydra org-gel-tools (:color pink :hint nil :exit t)
+  "
+^Org Gel^
+----------------------------------------------------------------------------------------------------------------
+_p_: region to gel para
+_l_: org link to gel A
+_t_: org text to gel Text
+
+"
+  ("p" gel-region-to-para nil)
+  ("l" org-gel/parse-org-link nil)
+  ("t" org-gel/text nil)
+
+  ("q" nil "quit" :exit t))
+
+(global-set-key (kbd "C-c a") 'org-gel-tools/body)

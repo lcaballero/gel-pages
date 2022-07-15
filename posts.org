@@ -1,0 +1,22 @@
+* Posts
+** Explain my Path to Generative
+   For example:
+   - Comic books in the 90s (Jim Lee, Marc Silvestri, Todd McFarlane,
+     etc)
+   - Art School
+   - Business Cards Tomorrow (BCT)
+   - CAD Work at Power Engineers
+   - Computer Science
+     - Vector Mathematics
+     - Fractals
+     - PostScript
+     - List / AutoLisp
+     - Jared Tarbel (complexification)
+     - Processing and Language Design
+     - Trig and Algebra
+     - Calculus 1,2,3
+   - Front End Work at WSOD
+     - Charts and Graphs
+     - Spark Charts and Stock Charts
+
+       

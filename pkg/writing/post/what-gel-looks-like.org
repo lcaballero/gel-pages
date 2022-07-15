@@ -3,19 +3,26 @@
   HTML from within Go code.  The library doesn't use templates.  I
   wrote it years ago and kind of forgot about it.
 
-  But recently, I've started getting a bit annoyed with [[https://pkg.go.dev/html/template@go1.18.3][Go Templates]].
-  So, I looked to using =gel= on this latest rendition of the site.  I'll
-  call it the July 2022 rendition, just to mark the date.
+  Text(`But recently, I've started getting a bit annoyed with `), 
+  A.Atts("href","https://pkg.go.dev/html/template@go1.18.3").Text("Go Templates")
+  Text(`.  So, I looked to using =gel= on this latest rendition of the site.  I'll
+  call it the July 2022 rendition, just to mark the date.`),
 
-  This is the 3rd or 4th time I've written this site.  And for the
-  record there was a [[https://pugjs.org/api/getting-started.html][Pug]] version, an [[https://orgmode.org/][org-mode]] using [[https://www.emacswiki.org/emacs/BatchMode][emacs batch]]
-  conversion version, and, I think, a [[https://github.com/vannizhang/react-redux-boilerplate][react, redux, webpack]] version at
-  some point as well.  This is the Gel version.
+  Text(`This is the 3rd or 4th time I've written this site.  And for the record there was a `)
+  Text(`, `),
+  A.Atts("href","https://pugjs.org/api/getting-started.html").Text("Pug")
+  Text(`version, an `), A.Atts("href","https://orgmode.org/").Text("org-mode"),
+  Text(` using `), 
+  A.Atts("href","https://www.emacswiki.org/emacs/BatchMode").Text("emacs batch")
+  Text(`conversion version, and, I think, a `),
+  A.Atts("href","https://github.com/vannizhang/react-redux-boilerplate").Text("react, redux, webpack"),
+  Text(` version at`),
+  Text(`, some point as well.  This is the Gel version.`),
 
 * What I like About this =gel= Version
   Having rewriten the site now, I have a new appreciation for =gel=.
 
-  Just for clarity this is what using =gel= tends to look like:
+  Text(`Just for clarity this is what using =gel= tends to look like:`),
 
   #+begin_src go
     title :=  Div(
@@ -117,7 +124,20 @@
   so I can chain calls to [[https://pkg.go.dev/net/url#Values.Add][Add]].
 
 * Some Improvements to =gel=
-  I've found a few things to change in a v2 of the library.  Which is
-  to say that the abstractions may not be intuitive enough.  Mainly the sequence of `.ToNode().WriteTo(..)`
+  I've found a few things to change in a v2 of the library.
 
-  
+  #+begin_src elisp
+  ||https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/||Kubernetes Labels and Selectors
+    (link
+     (:type https
+            :path //kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+            :format bracket
+            :raw-link https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+            :application nil
+            :search-option nil
+            :begin 4104
+            :end 4214
+            :contents-begin 4181
+            :contents-end 4212
+            :post-blank 0))
+  #+end_src
