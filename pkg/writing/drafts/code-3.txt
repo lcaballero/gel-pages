@@ -1,0 +1,4 @@
+indent := NewIndent()
+buf := bytes.NewBufferString("")
+p.ToNode().WriteToIndented(indent, buf)
+fmt.Println(buf.String())

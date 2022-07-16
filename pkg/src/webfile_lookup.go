@@ -28,6 +28,7 @@ type DeploymentEnv string
 func (e DeploymentEnv) IsProd() bool {
 	return string(e) == "prod"
 }
+
 func (e DeploymentEnv) IsDev() bool {
 	return !e.IsProd()
 }
@@ -43,6 +44,7 @@ func NewWebFileLookup(loc Locator, env Environment) WebFileLookup {
 	pages.Add(NewPostSiteDesignTools(env))
 	pages.Add(NewPostOrganizingPins(env))
 	pages.Add(NewPostFirstStepsOfBuildingThisSite(env))
+	pages.Add(NewGeneratingHtmlWithGo(env))
 
 	// These require page names and path information
 	site0 := NewTextSitemap(loc, pages)

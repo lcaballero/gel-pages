@@ -46,7 +46,6 @@ func (p *HtmlPage) SetDebug(v View) {
 }
 
 func (p *HtmlPage) ToNode() *Node {
-	BaseCSS.ToNode().Println()
 	return Fragment{
 		HTML5(),
 		Html(
@@ -56,10 +55,8 @@ func (p *HtmlPage) ToNode() *Node {
 				Link.Atts("rel", "icon", "type", "image/png", "sizes", "32x32", "href", "/img/favicon-32x32.png"),
 				Link.Atts("rel", "icon", "type", "image/png", "sizes", "16x16", "href", "/img/favicon-16x16.png"),
 				Link.Atts("rel", "manifest", "href", "/img/site.webmanifest"),
-				//Default(p.Styles, BaseCSS),
-				BaseCSS,
-				//Default(p.Scripts, BaseJS),
-				BaseJS,
+				Default(p.Styles, BaseCSS),
+				Default(p.Scripts, BaseJS),
 				Meta.Atts("name", "author", "content", DefaultAuthor(p.Author)),
 				Meta.Atts("name", "title", "content", p.Title()),
 				Title(Default(p.Title(), p.Title())),

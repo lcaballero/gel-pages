@@ -23,7 +23,10 @@ func (a AuxFooter) ToNode() *Node {
 					H3.Text("Drafts"),
 					Ul(
 						Li(
-							A.Class("c10").Atts("href", "/posts/first-steps-of-building-this-site/").Text("[DRAFT] First Steps of Building this Site"),
+							A.Class("c10").Atts("href", "/posts/first-steps-of-building-this-site/").Text("First Steps of Building this Site"),
+						),
+						Li(
+							A.Class("c10").Atts("href", "/posts/generating-html-with-go/").Text("Generating HTML with Go (not using templates)"),
 						),
 					),
 				),

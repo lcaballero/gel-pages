@@ -19,6 +19,14 @@ dist() {
                      --base "https://www.read-later.net"
 }
 
+prod() {
+  build && gel-pages write \
+                     --root "$DIR/.dist" \
+                     --posts posts \
+                     --base "https://www.read-later.net" \
+                     --env prod
+}
+
 tests() {
   (cd "$DIR/pkg/src" && go test ./...)
 }

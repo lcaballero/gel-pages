@@ -1,6 +1,11 @@
 .DS_STORE
 .dist
 .temp
-*.gen.go
+
 dl/
 dist.tar.gz
+
+
+*.gen.go
+*.gen.html
+*.out

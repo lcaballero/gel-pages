@@ -9,13 +9,17 @@
 (defun pages-build/sh (script func)
   (shell-command (pages-build/file script func)))
 
-(defun pages-build/deploy ()
+(defun pages-build/deploy-www ()
   (interactive)
   (pages-build/sh "deploy" "www"))
 
 (defun pages-build/deploy-clean ()
   (interactive)
   (pages-build/sh "deploy" "clean"))
+
+(defun pages-build/deploy-prod ()
+  (interactive)
+  (pages-build/sh "deploy" "prod"))
 
 (defun pages-build/run-dist ()
   (interactive)
@@ -63,8 +67,8 @@ _l_: ./run.sh lint
   ("l" pages-build/run-lint nil)
 
   ;; local tooling for ./deploy functions
-  ("W" pages-build/deploy nil)
+  ("W" pages-build/deploy-www nil)
   ("C" pages-build/deploy-clean nil)
-  ("P" pages-build/deploy nil)
+  ("P" pages-build/deploy-prod nil)
 
   ("q" nil "quit" :exit t))

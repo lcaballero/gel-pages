@@ -20,6 +20,7 @@ code {
 }
 .code pre span {
     display: inline;
+    line-height: 1.3;
 }
 
 .code pre span:nth-child(3) {

@@ -1,3 +1,6 @@
+i {
+    font-style: italic;
+}
 /*========== main ==========*/
 .main {
     background-color: #fffff4;
@@ -71,9 +74,9 @@ footer .container.shadow {
 .banner .win {
     position: relative;
 }
-.banner .inner { 
+.banner .inner {
     box-shadow: 0 0 40px rgb(71 51 31 / 50%);
-} 
+}
 .banner .img {
     height: 360px;
     overflow: hidden;

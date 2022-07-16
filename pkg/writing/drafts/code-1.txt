@@ -1,0 +1,25 @@
+func (p *HtmlPage) ToNode() *Node {
+  return Fragment{
+    HTML5(),
+    Html(
+      Head(
+        Link.Atts("rel", "icon", "type", "image/png", "sizes", "16x16", "href", "/img/favicon-16x16.png"),
+        Def(p.Styles, BaseCSS),
+        Def(p.Scripts, BaseJS),
+        Title(p.Title()),
+      ),
+      Body(
+        Div.Class("main").Add(
+          Sidebar{},
+          Div.Class("container shadow bg-1").Add(
+            Div.Class("prose").Add(
+              p.Content,
+            ),
+          ),
+          AuxFooter{}
+          Debug{},
+        ),
+      ),
+    ),
+  }.ToNode()
+}

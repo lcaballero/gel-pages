@@ -50,6 +50,10 @@ www() {
     clean && pack-up && push-out && publish
 }
 
+prod() {
+    ./run.sh clean && ./run.sh prod && www
+}
+
 if [ -z "$1" ]; then
     echo "deploying application"
     www
